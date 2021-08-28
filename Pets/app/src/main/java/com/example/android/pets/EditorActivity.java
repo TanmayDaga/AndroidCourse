@@ -89,6 +89,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (mCurrentPetUri == null){
             setTitle(getString(R.string.editor_activity_title_new_pet));
+            invalidateOptionsMenu();
 
 
         }
@@ -196,6 +197,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        super.onPrepareOptionsMenu(menu);
+        if (mCurrentPetUri ==null){
+            MenuItem deleteItem = menu.findItem(R.id.action_delete);
+            deleteItem.setVisible(false);
+        }
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
@@ -208,8 +220,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
                 // Do nothing for now
+                showDeleteComfirmationDialog();
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
+
+
             case android.R.id.home:
                 if (!mPetHasChanged){
                 // Navigate back to parent activity (CatalogActivity)
@@ -217,8 +232,38 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 return true;
                 }
 
+                DialogInterface.OnClickListener discardButtonClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        NavUtils.navigateUpFromSameTask(EditorActivity.this);
+                    }
+                };
+                showUnsavedChangesDialog(discardButtonClickListener);
+
+
+
+
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if(!mPetHasChanged){
+            super.onBackPressed();
+            return;
+        }
+        DialogInterface.OnClickListener discardButtonClickListener =
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                };
+
+        showUnsavedChangesDialog(discardButtonClickListener);
+
     }
 
     @Override
@@ -285,5 +330,55 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.unsaved_changes_dialog_message));
         builder.setPositiveButton(getString(R.string.Discard),discardButtonClickListener);
+        builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (dialogInterface!=null){
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
+
+    private void showDeleteComfirmationDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.delete_Dialog_msg));
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deletePet();
+            }
+        })
+        ;
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (dialogInterface != null){
+                    dialogInterface.dismiss();
+                }
+
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        builder.show();
+    }
+
+    private  void deletePet(){
+        // Only perform delete if this is an existing pet
+        if (mCurrentPetUri != null){
+            int rowsDeleted = getContentResolver().delete(mCurrentPetUri,null,null);
+            if (rowsDeleted == 0){
+                Toast.makeText(this,getString(R.string.editor_delete_pet_failed),Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(this,getString(R.string.editor_delete_pet_successful),Toast.LENGTH_SHORT).show();
+            }
+
+            finish();
+        }
+    }
+
 }

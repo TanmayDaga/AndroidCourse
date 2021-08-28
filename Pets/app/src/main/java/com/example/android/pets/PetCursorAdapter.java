@@ -56,6 +56,6 @@ public class PetCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         // TODO: Fill out this method
         ((TextView) view.findViewById(R.id.name)).setText(cursor.getString(cursor.getColumnIndexOrThrow(PetEntry.COLUMN_PET_NAME)));
-        ((TextView) view.findViewById(R.id.summary)).setText(cursor.getString(cursor.getColumnIndexOrThrow(PetEntry.COLUMN_PET_BREED)));
+        ((TextView) view.findViewById(R.id.summary)).setText(cursor.getString(cursor.getColumnIndexOrThrow(PetEntry.COLUMN_PET_BREED))==null?"Unknown Breed":cursor.getString(cursor.getColumnIndexOrThrow(PetEntry.COLUMN_PET_BREED)));
     }
 }
