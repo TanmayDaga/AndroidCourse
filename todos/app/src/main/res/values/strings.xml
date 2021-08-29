@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">todos</string>
+    <string name="empty_title_text">Add todos to get started. Click on the below icon</string>
+</resources>
