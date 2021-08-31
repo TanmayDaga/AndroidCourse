@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">todos</string>
     <string name="empty_title_text">Add todos to get started. Click on the below icon</string>
+    <string name="no_description">No Description</string>
+    <string name="delete_all_todos">Delete All Todos</string>
+    <string name="save">Save</string>
+    <string name="delete_todo">Delete Todo</string>
 </resources>

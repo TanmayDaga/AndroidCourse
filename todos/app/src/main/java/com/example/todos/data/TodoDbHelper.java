@@ -14,10 +14,10 @@ public class TodoDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String SQL_CREATE_TODOS_TABLE = "CREATE TABLE "+TodoEntry.TABLE_NAME+"("+
-                TodoEntry._ID+"INTEGER PRIMARY KEY AUTOINCREMENT,"+
+                TodoEntry._ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 TodoEntry.COLUMN_TITLE+" TEXT NOT NULL,"+
                 TodoEntry.COLUMN_DESCRIPTION+" TEXT,"+
-                TodoEntry.COLUMN_DUE_DATE+"TEXT);";
+                TodoEntry.COLUMN_DUE_DATE+" TEXT);";
         sqLiteDatabase.execSQL(SQL_CREATE_TODOS_TABLE);
     }
 
