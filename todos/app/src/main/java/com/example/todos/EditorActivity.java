@@ -1,15 +1,17 @@
 package com.example.todos;
 
+import android.annotation.SuppressLint;
+import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Loader;
 import android.os.Build;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-import androidx.loader.content.CursorLoader;
-import com.example.todos.data.TodoContract;
+import android.content.CursorLoader;
 import com.example.todos.data.TodoContract.TodoEntry;
 import android.database.Cursor;
 import android.net.Uri;
@@ -23,10 +25,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.Loader;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -48,6 +50,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     }
 };
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,21 +61,34 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
 
         mCalendarView = findViewById(R.id.calendarView);
-        mTitleTextView = findViewById(R.id.titleTextView);
-        mDescTextView = findViewById(R.id.descriptionTextView);
+        mTitleTextView = findViewById(R.id.editTextTitle);
+        mDescTextView = findViewById(R.id.descriptionEditText);
+
+        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(i,i1,i2);
+                calendarView.setDate(calendar.getTimeInMillis());
+            }
+        });
+
+
 
         // Setting minimum date of calendar view
         if (mCurrentPetUri == null){
-            mCalendarView.setMinDate(Calendar.getInstance().getTimeInMillis());
+//            mCalendarView.setMinDate(Calendar.getInstance().getTimeInMillis());
             setTitle("Add a Todo");
             invalidateOptionsMenu();
 
         }
         else {
             setTitle("Edit Todo");
-            getLoaderManager().initLoader(EXISTING_TODO_LOADER,null,null);
+            getLoaderManager().initLoader(EXISTING_TODO_LOADER,null,this);
         }
-
+        mTitleTextView.setOnTouchListener(mOnTouchListener);
+        mCalendarView.setOnTouchListener(mOnTouchListener);
+        mDescTextView.setOnTouchListener(mOnTouchListener);
     }
 
     @NonNull
@@ -84,22 +100,32 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
           TodoEntry.COLUMN_DESCRIPTION,
           TodoEntry.COLUMN_DUE_DATE
         };
+
         return new CursorLoader(this,mCurrentPetUri,projection,null,null,null);
     }
 
     @Override
-    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
-        mTitleTextView.setText(data.getString(data.getColumnIndexOrThrow(TodoEntry.COLUMN_TITLE)));
-        mDescTextView.setText(data.getString(data.getColumnIndexOrThrow(TodoEntry.COLUMN_DESCRIPTION)));
-        mCalendarView.setDate(Long.parseLong(data.getString(data.getColumnIndexOrThrow(TodoEntry.COLUMN_DUE_DATE))));
-    }
+    public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
+        if (data == null){
+            return;
+        }
+
+        if (data.moveToNext()){
+            mTitleTextView.setText(data.getString(data.getColumnIndexOrThrow(TodoEntry.COLUMN_TITLE)));
+            mDescTextView.setText(data.getString(data.getColumnIndexOrThrow(TodoEntry.COLUMN_DESCRIPTION)));
+            mCalendarView.setDate(Long.parseLong(data.getString(data.getColumnIndexOrThrow(TodoEntry.COLUMN_DUE_DATE))));
+
+        }
+         }
 
     @Override
-    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+    public void onLoaderReset(android.content.Loader<Cursor> loader) {
         mTitleTextView.setText("");
         mDescTextView.setText("");
         mCalendarView.setMinDate(Calendar.getInstance().getTimeInMillis());
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,8 +161,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private void saveTodo(){
         ContentValues values = new ContentValues();
         String title  = mTitleTextView.getText().toString().trim();
-        if (title == null){
-            Toast.makeText(this,"Title cannot be Empty",Toast.LENGTH_SHORT);
+        if (TextUtils.isEmpty(title)){
+            Toast.makeText(this,"Title cannot be Empty",Toast.LENGTH_SHORT).show();
             return;
         }
         values.put(TodoEntry.COLUMN_TITLE,title);
@@ -165,6 +191,16 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (mTodoHasChanged && !TextUtils.isEmpty(mCurrentPetUri.toString())){
+            showUnsavedChanges();
+            return;
+        }
+        super.onBackPressed();
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     private void deleteTodo(){
@@ -190,6 +226,28 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 if (dialogInterface != null){
                 dialogInterface.dismiss();
             }}
+        });
+        builder.create().show();
+
+    }
+
+    private void showUnsavedChanges(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditorActivity.this);
+        builder.setMessage("Do you want to save changes?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.R)
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                saveTodo();
+                finish();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                finish();
+            }
         });
         builder.create().show();
 

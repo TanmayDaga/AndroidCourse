@@ -50,7 +50,7 @@ public class TodoProvider extends ContentProvider {
                 cursor = db.query(TodoEntry.TABLE_NAME, projections, selection, selectionArgs, null, null, sortOrder);
                 break;
             case TODOS_ID:
-                selection = TodoEntry._ID + "?=";
+                selection = TodoEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = db.query(TodoEntry.TABLE_NAME, projections, selection, selectionArgs, null, null, sortOrder);
                 break;
