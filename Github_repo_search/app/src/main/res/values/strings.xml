@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Github Query</string>
     <string name="search">Search</string>
+    <string name="error_message">Failed to retrieve results,Please Try again</string>
 </resources>

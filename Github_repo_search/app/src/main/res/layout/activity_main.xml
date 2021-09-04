@@ -29,18 +29,37 @@
         android:hint="Click search and your url will show up here"
         android:layout_margin="8dp"/>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        >
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/tv_github_search_results_json"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp" />
+        </ScrollView>
 
         <TextView
+            android:id="@+id/tvShowError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:id="@+id/tv_github_search_results_json"/>
-    </ScrollView>
+            android:text="@string/error_message"
+            android:textSize="22sp"
+            android:visibility="invisible" />
+
+        <ProgressBar
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:visibility="invisible"
+            android:id="@+id/PBLoadingIndicator"/>
+    </FrameLayout>
 
 
 </LinearLayout>
