@@ -29,7 +29,7 @@ public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.Foreca
         }
 
         }
-    
+
     @Override
     public ForecastAdapterViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
         Context context = parent.getContext();
