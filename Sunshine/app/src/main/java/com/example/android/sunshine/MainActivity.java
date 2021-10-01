@@ -2,8 +2,10 @@ package com.example.android.sunshine;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.utilities.NetworkUtils;
@@ -22,7 +25,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -36,8 +39,17 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_forecast);
         errorMessageTextView = (TextView) findViewById(R.id.error_message_display);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.progress_bar);
-        loadWeatherData();
 
+
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+        mRecyclerView.setHasFixedSize(true);//Improve performance
+        mForecastAdapter = new ForecastAdapter();
+        mRecyclerView.setAdapter(mForecastAdapter);
+
+
+        loadWeatherData();
     }
 
     private void loadWeatherData(){
@@ -47,12 +59,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void showWeatherDataView(){
         errorMessageTextView.setVisibility(View.INVISIBLE);
-        mWeatherTextView.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
     private void showErrorMessage(){
         errorMessageTextView.setVisibility(View.VISIBLE);
-        mWeatherTextView.setVisibility(View.INVISIBLE);
+        mRecyclerView.setVisibility(View.INVISIBLE);
     }
+
 
     public class fetchWeatherTask extends AsyncTask<String, Void, String[]>{
         @Override
@@ -89,16 +102,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String[] weatherData) {
             mLoadingIndicator.setVisibility(View.INVISIBLE);
-            if (weatherData != null){
-                showWeatherDataView();
-                for (String weatherString: weatherData) {
-                    mWeatherTextView.append((weatherString)+"\n\n");
-                }
+            mForecastAdapter.setmWeatherData(weatherData);
 
-            }
-            else {
-                showErrorMessage();
-            }
+
 
         }
     }
@@ -114,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_refresh){
-            mWeatherTextView.setText("");
+            mForecastAdapter.setmWeatherData(null);
             loadWeatherData();
             return true;
         }
