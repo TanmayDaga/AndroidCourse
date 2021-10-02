@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements ForecastAdapter.onClickHandler{
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);//Improve performance
-        mForecastAdapter = new ForecastAdapter();
+        mForecastAdapter = new ForecastAdapter(this);
         mRecyclerView.setAdapter(mForecastAdapter);
 
 
@@ -55,6 +55,10 @@ public class MainActivity extends AppCompatActivity{
     private void loadWeatherData(){
         String location = SunshinePreferences.getPreferredWeatherLocation(this);
         new fetchWeatherTask().execute(location);
+    }
+
+    public void onClick(String weatherForDAy){
+        Toast.makeText(this,weatherForDAy,Toast.LENGTH_LONG).show();
     }
 
     private void showWeatherDataView(){
