@@ -1,10 +1,12 @@
 package com.example.implicitintents;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ShareCompat;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,9 +41,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickShareTextButton(View view){
-
+String textToShare = "this text will be shate dskjdskakfdshjhhdf";
+shareText(textToShare);
     }
     public void myOwnButton(View view){
+        // will start camera
+        Intent intent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+        if (intent.resolveActivity(getPackageManager())!= null){
+            startActivity(intent);
+        }
+    }
+
+
+    private void shareText(String s){
+        String mimeType = "text/plain";
+        String title = "Learning how to share";
+        ShareCompat.IntentBuilder.from(this).setType(mimeType).setChooserTitle(title).setText(s).startChooser();
 
     }
 }
