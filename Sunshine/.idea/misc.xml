@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../layout/custom_preview.xml" value="0.32" />
+        <entry key="app/src/main/res/layout/activity_details.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/activity_forecast.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layout/forecast_list_item.xml" value="0.14361702127659576" />
+        <entry key="app/src/main/res/menu/details.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/menu/forecast.xml" value="0.26944444444444443" />
       </map>
     </option>
