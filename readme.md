@@ -13,3 +13,10 @@ views ko cache me store karta hain fir usme he data change karke dikhata hain
 
 
 visible but not active --> jab popup aata hain
+
+## Background
+Asyntask - asynchornus with activity
+asynktask loader - synchronus with activity
+
+loader -> id de kar baadme activity destroy ke baad bhi use karsakte hain
+asynctask - zombify data if activity destroy
