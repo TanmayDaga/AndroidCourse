@@ -1,7 +1,10 @@
 package com.example.android.sunshine;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +31,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity implements ForecastAdapter.onClickHandler {
+public class MainActivity extends AppCompatActivity implements ForecastAdapter.onClickHandler , LoaderManager.LoaderCallbacks<String[]> {
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -83,6 +86,22 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
     private void showErrorMessage() {
         errorMessageTextView.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.INVISIBLE);
+    }
+
+    @NonNull
+    @Override
+    public Loader<String[]> onCreateLoader(int id, @Nullable Bundle args) {
+        mLoadingIndicator.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<String[]> loader, String[] data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<String[]> loader) {
+
     }
 
 

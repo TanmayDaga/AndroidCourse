@@ -1,6 +1,7 @@
 package com.example.android.datafrominternet;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -109,14 +110,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<String> onCreateLoader(int i, final Bundle bundle) {
         return new AsyncTaskLoader<String>(this) {
+
+            String mGithubJson;
             @Override
             protected void onStartLoading() {
                 if (bundle == null){
                     return;
                 }
+
+                if (mGithubJson != null){
+                    deliverResult(mGithubJson);
+                }
+                else{
                 mLoadingIndicator.setVisibility(View.VISIBLE);
-                forceLoad();
+                forceLoad();}
             }
+
 
             @Override
             public String loadInBackground() {
@@ -131,6 +140,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                        return null;
                    }
                    return null;
+
+            }
+
+            @Override
+            public void deliverResult(@Nullable String data) {
+                super.deliverResult(data);
 
             }
         };
