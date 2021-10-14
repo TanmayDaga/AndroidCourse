@@ -24,3 +24,10 @@ asynctask - zombify data if activity destroy
 
 ## Data persistence
 https://docs.google.com/document/d/1rnEoic3ACwRLg-l-b2CalbLy4ej3n91U8ZZ7ufyx_cg/edit?usp=sharing
+
+
+## Fragements
+https://docs.google.com/document/d/1RINnWQaRnt-LyFNgXurkHJX9OLQTUxmyJRX_rw8ImmA/edit?usp=sharing
+
+
+Manifest Launchmode --> Jab back press kare toh activity recreate na ho aur vaisi ki vaisi he rahe

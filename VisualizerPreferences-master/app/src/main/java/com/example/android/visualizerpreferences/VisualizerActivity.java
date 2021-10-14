@@ -1,12 +1,16 @@
 package com.example.android.visualizerpreferences;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.android.visualizerpreferences.AudioVisuals.AudioInputReader;
@@ -99,4 +103,22 @@ public class VisualizerActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.visualizer_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int ItemId = item.getItemId();
+        switch (ItemId){
+            case R.id.action_setting:
+                Intent startSettingActivity = new Intent(VisualizerActivity.this,SettingsActivity.class);
+                startActivity(startSettingActivity);
+                return true;
+            default:
+                return true;
+        }
+    }
 }
