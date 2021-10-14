@@ -20,3 +20,7 @@ asynktask loader - synchronus with activity
 
 loader -> id de kar baadme activity destroy ke baad bhi use karsakte hain
 asynctask - zombify data if activity destroy
+
+
+## Data persistence
+https://docs.google.com/document/d/1rnEoic3ACwRLg-l-b2CalbLy4ej3n91U8ZZ7ufyx_cg/edit?usp=sharing
