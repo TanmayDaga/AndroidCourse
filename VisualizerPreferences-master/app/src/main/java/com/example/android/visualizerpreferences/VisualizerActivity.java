@@ -46,22 +46,35 @@ public class VisualizerActivity extends AppCompatActivity implements SharedPrefe
 
         mVisualizerView.setShowTreble(sharedPreferences.getBoolean(getString(R.string.pref_show_treble_key),
                 getResources().getBoolean(R.bool.pref_show_treble_default)));
+
+
+        loadColorFromPreferences(sharedPreferences);
         mVisualizerView.setMinSizeScale(2);
-        mVisualizerView.setColor(getString(R.string.pref_color_blue_value));
+
+
         sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
+    private void loadColorFromPreferences(SharedPreferences sharedPreferences){
+        mVisualizerView.setColor(sharedPreferences.getString(getString(R.string.pref_shape_color_key),
+                getString(R.string.pref_color_red_value)));
+    }
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
 
         if (key.equals(getString(R.string.pref_show_bass_key))) {
-            mVisualizerView.setShowBass(sharedPreferences.getBoolean(getString(R.string.pref_show_bass_key), getResources().getBoolean(R.bool.pref_show_bass_default)));
+            mVisualizerView.setShowBass(sharedPreferences.getBoolean(getString(R.string.pref_show_bass_key),
+                    getResources().getBoolean(R.bool.pref_show_bass_default)));
         } else if (key.equals(getString(R.string.pref_show_mid_range_key))) {
             mVisualizerView.setShowMid(sharedPreferences.getBoolean(getString(R.string.pref_show_mid_range_key),
                     getResources().getBoolean(R.bool.pref_show_mid_range_default)));
         } else if (key.equals(getString(R.string.pref_show_treble_key))) {
-            mVisualizerView.setShowTreble(sharedPreferences.getBoolean(getString(R.string.pref_show_treble_key), getResources().getBoolean(R.bool.pref_show_treble_default)));
+            mVisualizerView.setShowTreble(sharedPreferences.getBoolean(getString(R.string.pref_show_treble_key),
+                    getResources().getBoolean(R.bool.pref_show_treble_default)));
+        }
+        else if (key.equals(getString(R.string.pref_shape_color_key))){
+            loadColorFromPreferences(sharedPreferences);
         }
     }
 
