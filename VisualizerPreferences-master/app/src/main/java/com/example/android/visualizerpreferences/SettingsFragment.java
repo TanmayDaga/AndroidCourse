@@ -2,6 +2,7 @@ package com.example.android.visualizerpreferences;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.preference.CheckBoxPreference;
@@ -11,7 +12,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
 
-public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener,
+        Preference.OnPreferenceChangeListener {
 
 
     @Override
@@ -27,6 +29,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
                 setPreferenceSummary(p, value);
             }
         }
+        Preference preference = findPreference(getString(R.string.pref_size_key));
+        preference.setOnPreferenceChangeListener(this);
     }
 
     private void setPreferenceSummary(Preference preference, String value) {
@@ -40,8 +44,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
 //                Label set kara rahe hain naki value
                 listPreference.setSummary(listPreference.getEntries()[prefIndex]);
             }
-        }
-        else if (preference instanceof EditTextPreference){
+        } else if (preference instanceof EditTextPreference) {
             //setting summary of edit text
             preference.setSummary(value);
         }
@@ -73,5 +76,29 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
     public void onDestroy() {
         super.onDestroy();
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        Toast error = Toast.makeText(getContext(), "Please select number between 0.1 and 3", Toast.LENGTH_SHORT);
+
+//        Double check if edit text preference
+        String sizeKey = getString(R.string.pref_size_key);
+        if (preference.getKey().equals(sizeKey)) {
+            String stringSize = (String) newValue;
+            try {
+                float size = Float.parseFloat(stringSize);
+//                Show error condition
+                if (size > 3 || size < 0) {
+                    error.show();
+                    return false;
+                }
+            }
+            catch (NumberFormatException nfe){
+                error.show();
+                return false;
+            }
+        }
+        return true;
     }
 }
