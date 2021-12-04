@@ -182,6 +182,9 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
             openLocationInMap();
             return true;
         }
+        if (id == R.id.action_settings){
+            startActivity(new Intent(this,SettingsActivity.class));
+        }
         return super.onOptionsItemSelected(item);
     }
 }
