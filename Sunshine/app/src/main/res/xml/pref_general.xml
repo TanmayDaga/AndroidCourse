@@ -8,9 +8,9 @@
         android:title="@string/pref_location_label"
         android:inputType="text" />
     <ListPreference
-        android:entries=""
-        android:defaultValue="@string/pref_units_label_metrics"
-        android:entryValues=""
+        android:entries="@array/pref_units_options"
+        android:defaultValue="@string/pref_units_imperial_key"
+        android:entryValues="@array/pref_units_values"
         android:key="@string/pref_units_key"
         android:title="@string/pref_units_label"
         />

@@ -148,7 +148,7 @@
 
 
     <string name="pref_units_label">Temperature</string>
-    <string name="pref_units_label_metrics">Metrics</string>
+    <string name="pref_units_label_metric">Metric</string>
     <string name="pref_units_label_Imperial">Imperial</string>
     <string name="pref_units_key" translatable="false">units</string>
     <string name="pref_units_metrics_key" translatable="false">metrics</string>
