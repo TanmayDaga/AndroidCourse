@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">SettingsPref</string>
+
+
+    <string name="checkBoxTitle">check box title</string>
+    <string name="checkboxon">On</string>
+    <string name="checkboxof">Off</string>
+    <string name="checkboxKey">checki</string>
+
+    <string name="listPrefKey">listi</string>
+    <string name="listPrefTitle">List Preference</string>
+
+
+    <string name="l1_option">L1</string>
+    <string name="l1_key">L1_key</string>
+    <string name="l2_option">L2</string>
+    <string name="l2_key">L2_key</string>
+
+
+    <string name="edithTitle">Edit Text prefernce title</string>
+    <string name="edithdefault">Default Edith value</string>
+    <string name="edithKey">edith</string>
+
+</resources>

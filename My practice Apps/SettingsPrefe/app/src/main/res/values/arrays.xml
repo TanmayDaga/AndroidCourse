@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ls1_key">
+        <item>@string/l1_key</item>
+        <item>@string/l2_key</item>
+    </string-array>
+
+    <string-array name="ls1_values">
+        <item>@string/l1_option</item>
+        <item>@string/l2_option</item>
+    </string-array>
+</resources>

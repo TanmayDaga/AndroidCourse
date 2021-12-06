@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:title="@string/checkBoxTitle"
+        android:defaultValue="@string/checkboxon"
+        android:summaryOn="@string/checkboxon"
+        android:summaryOff="@string/checkboxof"
+        android:key="@string/checkboxKey"
+        />
+
+    <EditTextPreference
+        android:title="@string/edithTitle"
+        android:defaultValue="@string/edithdefault"
+        android:key="@string/edithKey"
+        />
+    <ListPreference
+        android:title="@string/listPrefTitle"
+        android:entryValues="@array/ls1_key"
+        android:entries="@array/ls1_values"
+        android:key="@string/listPrefKey"
+        android:defaultValue="@string/l1_key"
+        />
+</PreferenceScreen>
