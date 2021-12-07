@@ -35,3 +35,7 @@ Manifest Launchmode --> Jab back press kare toh activity recreate na ho aur vais
 
 ## Shared preferences
 https://docs.google.com/document/d/1gYctPrIN44ySUNRCH5uTbb6GbNaweuj_-u2STGf_ShI/edit?usp=sharing
+
+
+## Content Providers
+https://docs.google.com/document/d/1QgC1yfk3fzKCQ3TDA-SABMTeahrcDCq2UIvbp5lD4ms/edit?usp=sharing
