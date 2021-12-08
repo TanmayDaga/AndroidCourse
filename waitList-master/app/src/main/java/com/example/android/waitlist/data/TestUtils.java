@@ -1,12 +1,15 @@
 package com.example.android.waitlist.data;
 
 import android.content.ContentValues;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.android.waitlist.data.WaitlistContract.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestUtils {
+
+
     public static void insertFakeData(SQLiteDatabase sqLiteDatabase){
         if (sqLiteDatabase == null){
             return;
@@ -41,6 +44,16 @@ public class TestUtils {
             sqLiteDatabase.beginTransaction();
             sqLiteDatabase.delete(WaitListEntry.TABLE_NAME,null,null);
 
+            for(ContentValues c:list){
+                sqLiteDatabase.insert(WaitListEntry.TABLE_NAME,null,c);
+            }
+
+        }
+        catch (SQLException e){
+
+        }
+        finally {
+            sqLiteDatabase.endTransaction();
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.example.android.waitlist;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,17 +9,21 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.waitlist.data.WaitlistContract;
+
 public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.GuestViewHolder> {
 
     private Context mContext;
+    private Cursor mCursor;
 
     /**
      * Constructor using the context and the db cursor
      *
      * @param context the calling context/activity
      */
-    public GuestListAdapter(Context context) {
+    public GuestListAdapter(Context context, Cursor cursor) {
         this.mContext = context;
+        this.mCursor = cursor;
     }
 
     @Override
@@ -32,12 +37,33 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
     @Override
     public void onBindViewHolder(GuestViewHolder holder, int position) {
 
+        if (!(mCursor.moveToPosition(position))) {
+            return;
+        }
+        String name = mCursor.getString(mCursor.getColumnIndex(WaitlistContract.WaitListEntry.COLUMN_GUEST_NAME));
+        int partySize = mCursor.getInt(mCursor.getColumnIndex(WaitlistContract.WaitListEntry.COLUMN_PARTY_SIZE));
+        Long id = mCursor.getLong(mCursor.getColumnIndex(WaitlistContract.WaitListEntry._ID));
+        holder.itemView.setTag(id);
+        holder.nameTextView.setText(name);
+        holder.partySizeTextView.setText(String.valueOf(partySize));
+
+
     }
 
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mCursor.getCount();
+    }
+
+    public void swapCursor(Cursor newCursor) {
+        if (mCursor != null) {
+            mCursor.close();
+        }
+        if (newCursor != null) {
+            mCursor = newCursor;
+            this.notifyDataSetChanged();
+        }
     }
 
 
@@ -62,6 +88,7 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Gues
             super(itemView);
             nameTextView = (TextView) itemView.findViewById(R.id.name_text_view);
             partySizeTextView = (TextView) itemView.findViewById(R.id.party_size_text_view);
+
         }
 
     }

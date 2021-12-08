@@ -17,11 +17,11 @@ public class WaitListDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        final String SQL_CREATE_WAITLIST_TABLE = "CREATE TABLE "+WaitListEntry.TABLE_NAME+
-                "("+WaitListEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT, "+
+        final String SQL_CREATE_WAITLIST_TABLE = " CREATE TABLE "+WaitListEntry.TABLE_NAME+
+                "("+WaitListEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 WaitListEntry.COLUMN_GUEST_NAME + " TEXT NOT NULL, "+
                 WaitListEntry.COLUMN_PARTY_SIZE + " INTEGER NOT NULL, "+
-                WaitListEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT  CURRENT_TIMESTAMP"+")";
+                WaitListEntry.COLUMN_TIMESTAMP + " TIMESTAMP DEFAULT  CURRENT_TIMESTAMP"+"); ";
 
         sqLiteDatabase.execSQL(SQL_CREATE_WAITLIST_TABLE);
     }
