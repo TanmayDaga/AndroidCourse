@@ -2,9 +2,16 @@ package com.example.android.quizexample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.droidtermsprovider.DroidTermsExampleContract;
 
 /**
  * Gets the data from the ContentProvider and shows a series of flash cards.
@@ -26,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     // advance the app to the next word
     private final int STATE_SHOWN = 1;
 
+    private Cursor mData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the views
         mButton = (Button) findViewById(R.id.button_next);
+
+        Uri myUri = DroidTermsExampleContract.CONTENT_URI;
+
+        new WordFetch().execute();
     }
 
     /**
      * This is called from the layout when the button is clicked and switches between the
      * two app states.
+     *
      * @param view The view that was clicked
      */
     public void onButtonClick(View view) {
@@ -73,4 +87,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public class WordFetch extends AsyncTask<Void, Void, Cursor> {
+
+
+        @Override
+        protected Cursor doInBackground(Void... params) {
+            ContentResolver contentResolver = getContentResolver();
+            Cursor cursor = contentResolver.query(DroidTermsExampleContract.CONTENT_URI,
+                    null, null, null, null);
+            return cursor;
+        }
+        @Override
+        protected void onPostExecute(Cursor cursor){
+            super.onPostExecute(cursor);
+            mData = cursor;
+        }
+
+    }
 }

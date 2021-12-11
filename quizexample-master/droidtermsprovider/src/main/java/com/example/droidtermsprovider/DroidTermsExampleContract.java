@@ -1,4 +1,4 @@
-package com.example.android.droidtermsprovider;
+package com.example.droidtermsprovider;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -14,7 +14,7 @@ public class DroidTermsExampleContract implements BaseColumns {
     /**
      * This it the content authority for DroidTermsExample provider.
      */
-    public static final String CONTENT_AUTHORITY = "com.example.udacity.droidtermsexample";
+    public static final String CONTENT_AUTHORITY = "com.example.android.droidtermsexample";
 
     /**
      * This is the {@link Uri} on which all other DroidTermsExample Uris are built.

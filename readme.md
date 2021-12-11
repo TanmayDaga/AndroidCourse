@@ -39,3 +39,6 @@ https://docs.google.com/document/d/1gYctPrIN44ySUNRCH5uTbb6GbNaweuj_-u2STGf_ShI/
 
 ## Content Providers
 https://docs.google.com/document/d/1QgC1yfk3fzKCQ3TDA-SABMTeahrcDCq2UIvbp5lD4ms/edit?usp=sharing
+
+## QUizExample
+https://docs.google.com/document/d/1aLqNtfX95VH3cjqiNu0GUxG_4x_R464yN4e4ZNuDblU/edit?usp=sharing
