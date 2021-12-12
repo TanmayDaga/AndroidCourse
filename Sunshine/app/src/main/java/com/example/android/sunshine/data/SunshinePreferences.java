@@ -10,11 +10,7 @@ import com.example.android.sunshine.R;
 
 public class SunshinePreferences {
 
-    /*
-     * Human readable location string, provided by the API.  Because for styling,
-     * "Mountain View" is more recognizable than 94043.
-     */
-    public static final String PREF_CITY_NAME = "city_name";
+
 
     /*
      * In order to uniquely pinpoint the location on the map when we launch the
@@ -23,40 +19,24 @@ public class SunshinePreferences {
     public static final String PREF_COORD_LAT = "coord_lat";
     public static final String PREF_COORD_LONG = "coord_long";
 
-    /*
-     * Before you implement methods to return your REAL preference for location,
-     * we provide some default values to work with.
-     */
-    private static final String DEFAULT_WEATHER_LOCATION = "94043,USA";
-    private static final double[] DEFAULT_WEATHER_COORDINATES = {37.4284, 122.0724};
-
-    private static final String DEFAULT_MAP_LOCATION =
-            "1600 Amphitheatre Parkway, Mountain View, CA 94043";
 
     /**
      * Helper method to handle setting location details in Preferences (City Name, Latitude,
      * Longitude)
      *
-     * @param c        Context used to get the SharedPreferences
-     * @param cityName A human-readable city name, e.g "Mountain View"
+     * @param context        Context used to get the SharedPreferences
      * @param lat      The latitude of the city
      * @param lon      The longitude of the city
      */
-    static public void setLocationDetails(Context c, String cityName, double lat, double lon) {
-        /** This will be implemented in a future lesson **/
-    }
+    static public void setLocationDetails(Context context, double lat, double lon) {
 
-    /**
-     * Helper method to handle setting a new location in preferences.  When this happens
-     * the database may need to be cleared.
-     *
-     * @param c               Context used to get the SharedPreferences
-     * @param locationSetting The location string used to request updates from the server.
-     * @param lat             The latitude of the city
-     * @param lon             The longitude of the city
-     */
-    static public void setLocation(Context c, String locationSetting, double lat, double lon) {
-        /** This will be implemented in a future lesson **/
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putLong(PREF_COORD_LAT , Double.doubleToRawLongBits(lat));
+        editor.putLong(PREF_COORD_LONG, Double.doubleToRawLongBits(lon));
+        editor.apply();
+
     }
 
     /**
@@ -65,8 +45,15 @@ public class SunshinePreferences {
      * @param c Context used to get the SharedPreferences
      */
     static public void resetLocationCoordinates(Context c) {
-        /** This will be implemented in a future lesson **/
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(c);
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.remove(PREF_COORD_LAT);
+        editor.remove(PREF_COORD_LONG);
+        editor.apply();
     }
+
 
     /**
      * Returns the location currently set in Preferences. The default location this method
@@ -109,6 +96,22 @@ public class SunshinePreferences {
     }
 
     /**
+     * Helper method to handle setting a new location in preferences.  When this happens
+     * the database may need to be cleared.
+     *
+     * @param c               Context used to get the SharedPreferences
+     * @param locationSetting The location string used to request updates from the server.
+     * @param lat             The latitude of the city
+     * @param lon             The longitude of the city
+     */
+    static public void setLocation(Context c, String locationSetting, double lat, double lon) {
+        /** This will be implemented in a future lesson **/
+    }
+
+
+
+
+    /**
      * Returns the location coordinates associated with the location.  Note that these coordinates
      * may not be set, which results in (0,0) being returned. (conveniently, 0,0 is in the middle
      * of the ocean off the west coast of Africa)
@@ -117,7 +120,13 @@ public class SunshinePreferences {
      * @return An array containing the two coordinate values.
      */
     public static double[] getLocationCoordinates(Context context) {
-        return getDefaultWeatherCoordinates();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        double[] preferredCoordinates  = new double[2];
+
+        preferredCoordinates[0] = Double.longBitsToDouble(sp.getLong(PREF_COORD_LAT,Double.doubleToRawLongBits(0.0)));
+        preferredCoordinates[1] = Double.longBitsToDouble(sp.getLong(PREF_COORD_LONG,Double.doubleToRawLongBits(0.0)));
+
+        return preferredCoordinates;
     }
 
     /**
@@ -128,17 +137,20 @@ public class SunshinePreferences {
      * @return true if lat/long are set
      */
     public static boolean isLocationLatLonAvailable(Context context) {
-        /** This will be implemented in a future lesson **/
-        return false;
+
+       SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+       boolean spContainsLatitude = sp.contains(PREF_COORD_LAT);
+       boolean spContainsLongitude = sp.contains(PREF_COORD_LAT);
+
+       boolean spContainBothLatitudeLongitude = false;
+
+       if(spContainsLatitude && spContainsLongitude){
+
+           spContainBothLatitudeLongitude = true;
+
+       }
+       return spContainBothLatitudeLongitude;
     }
 
-    private static String getDefaultWeatherLocation() {
-        /** This will be implemented in a future lesson **/
-        return DEFAULT_WEATHER_LOCATION;
-    }
 
-    public static double[] getDefaultWeatherCoordinates() {
-        /** This will be implemented in a future lesson **/
-        return DEFAULT_WEATHER_COORDINATES;
-    }
 }

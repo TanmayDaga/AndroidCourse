@@ -32,7 +32,7 @@ import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements ForecastAdapter.onClickHandler,
-        LoaderManager.LoaderCallbacks<String[]> ,
+        LoaderManager.LoaderCallbacks<String[]>,
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     private RecyclerView mRecyclerView;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
 
     private static final int FORECAST_LOADER_ID = 0;
 
-    private static boolean PREFERENCES_HAVE_BEEN_UPDATED =false;
+    private static boolean PREFERENCES_HAVE_BEEN_UPDATED = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +65,19 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
 
         int loaderId = FORECAST_LOADER_ID;
         LoaderManager.LoaderCallbacks<String[]> callbacks = MainActivity.this;
-        getSupportLoaderManager().initLoader(FORECAST_LOADER_ID,null,callbacks);
+        getSupportLoaderManager().initLoader(FORECAST_LOADER_ID, null, callbacks);
 
-        Log.d(TAG,"onCreate : registering preference changed listener");
+        Log.d(TAG, "onCreate : registering preference changed listener");
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(PREFERENCES_HAVE_BEEN_UPDATED){
+        if (PREFERENCES_HAVE_BEEN_UPDATED) {
 
-            Log.d(TAG,"onStart : preferences were updated");
-            getSupportLoaderManager().restartLoader(FORECAST_LOADER_ID,null,this); // Restarting the activity
+            Log.d(TAG, "onStart : preferences were updated");
+            getSupportLoaderManager().restartLoader(FORECAST_LOADER_ID, null, this); // Restarting the activity
             PREFERENCES_HAVE_BEEN_UPDATED = false;
         }
     }
@@ -127,8 +127,9 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
 
             @Override
             public String[] loadInBackground() {
-                String locationQuery = SunshinePreferences.getPreferredWeatherLocation(MainActivity.this);
-                URL url = NetworkUtils.buildUrl(locationQuery);
+
+                URL url = NetworkUtils.getUrl(MainActivity.this);
+
                 try {
                     String jsonWeatherResponse = NetworkUtils.getResponseFromHttpUrl(url);
                     String[] simpleJsonWeatherData = OpenWeatherJsonUtils.
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
 
     }
 
-    private void invalidateData(){
+    private void invalidateData() {
         mForecastAdapter.setmWeatherData(null);
     }
 
@@ -196,15 +197,15 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             invalidateData();
-            getSupportLoaderManager().restartLoader(FORECAST_LOADER_ID,null,this);
+            getSupportLoaderManager().restartLoader(FORECAST_LOADER_ID, null, this);
             return true;
         }
         if (id == R.id.action_map) {
             openLocationInMap();
             return true;
         }
-        if (id == R.id.action_settings){
-            startActivity(new Intent(this,SettingsActivity.class));
+        if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
