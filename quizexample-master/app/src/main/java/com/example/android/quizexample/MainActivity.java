@@ -1,17 +1,20 @@
 package com.example.android.quizexample;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.droidtermsprovider.DroidTermsExampleContract;
+
 
 /**
  * Gets the data from the ContentProvider and shows a series of flash cards.
@@ -35,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
     private Cursor mData;
 
+    private TextView mDefinitionTextView;
+    private TextView mWordTextView;
+
+    private int mDefCol, mWordCol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the views
         mButton = (Button) findViewById(R.id.button_next);
+        mWordTextView = (TextView) findViewById(R.id.text_view_word);
+        mDefinitionTextView = (TextView) findViewById(R.id.text_view_definition);
 
         Uri myUri = DroidTermsExampleContract.CONTENT_URI;
 
@@ -71,20 +80,38 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextWord() {
 
+        if (mData != null) {
+            if (!mData.moveToNext()) {
+                mData.moveToFirst();
+
+            }
+        }
+        mDefinitionTextView.setVisibility(View.INVISIBLE);
         // Change button text
         mButton.setText(getString(R.string.show_definition));
-
+        mWordTextView.setText(mData.getString(mWordCol));
+        mDefinitionTextView.setText(mData.getString(mDefCol));
         mCurrentState = STATE_HIDDEN;
 
     }
 
     public void showDefinition() {
 
-        // Change button text
-        mButton.setText(getString(R.string.next_word));
+        if (mData != null) {
 
-        mCurrentState = STATE_SHOWN;
+            mDefinitionTextView.setVisibility(View.VISIBLE);
+            mButton.setText(getString(R.string.next_word));
 
+            mCurrentState = STATE_SHOWN;
+        }
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mData.close();
     }
 
     public class WordFetch extends AsyncTask<Void, Void, Cursor> {
@@ -97,10 +124,20 @@ public class MainActivity extends AppCompatActivity {
                     null, null, null, null);
             return cursor;
         }
+
         @Override
-        protected void onPostExecute(Cursor cursor){
+        protected void onPostExecute(Cursor cursor) {
             super.onPostExecute(cursor);
             mData = cursor;
+            if(mData!=null){
+                mDefCol = cursor.getColumnIndex(DroidTermsExampleContract.COLUMN_DEFINITION);
+                mWordCol = cursor.getColumnIndex(DroidTermsExampleContract.COLUMN_WORD);
+            }
+
+
+
+            // Set initial state
+
         }
 
     }
