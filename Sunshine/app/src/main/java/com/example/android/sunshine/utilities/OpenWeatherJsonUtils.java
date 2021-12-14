@@ -21,30 +21,38 @@ public final class OpenWeatherJsonUtils {
      * Later on, we'll be parsing the JSON into structured data within the
      * getFullWeatherDataFromJson function, leveraging the data we have stored in the JSON. For
      * now, we just convert the JSON into human-readable strings.
-     *
-     * @param forecastJsonStr JSON response from server
-     *
-     * @return Array of Strings describing weather data
-     *
-     * @throws JSONException If JSON data cannot be properly parsed
      */
+
+    /*LOCATION INFORMATION*/
+    private static final String OWM_CITY = "city";
+    private static final String OWM_COORD = "coord";
+
+    /*Location Coordinates*/
+    private static final String OWM_LATITUDE = "lat";
+    private static final String OWM_LONGITUDE = "lon";
+
+    /* Weather information. Each day's forecast info is an element of the "list" array */
+    private static final String OWM_LIST = "list";
+
+    /* All temperatures are children of the "temp" object */
+    private static final String OWM_TEMPERATURE = "temp";
+
+    private static final String OWM_PRESSURE = "pressure";
+    private static final String OWM_HUMIDITY = "humidity";
+    private static final String OWM_WINDSPEED = "speed";
+    private static final String OWM_WIND_DIRECTION = "deg";
+    /* Max temperature for the day */
+    private static final String OWM_MAX = "max";
+    private static final String OWM_MIN = "min";
+
+    private static final String OWM_WEATHER = "weather";
+    private static final String OWM_WEATHER_ID = "id";
+    private static final String OWM_MESSAGE_CODE = "cod";
+
     public static String[] getSimpleWeatherStringsFromJson(Context context, String forecastJsonStr)
             throws JSONException {
 
-        /* Weather information. Each day's forecast info is an element of the "list" array */
-        final String OWM_LIST = "list";
 
-        /* All temperatures are children of the "temp" object */
-        final String OWM_TEMPERATURE = "temp";
-
-        /* Max temperature for the day */
-        final String OWM_MAX = "max";
-        final String OWM_MIN = "min";
-
-        final String OWM_WEATHER = "weather";
-        final String OWM_DESCRIPTION = "main";
-
-        final String OWM_MESSAGE_CODE = "cod";
 
         /* String array to hold each day's weather String */
         String[] parsedWeatherData = null;
@@ -123,10 +131,6 @@ public final class OpenWeatherJsonUtils {
 
     /**
      * Parse the JSON and convert it into ContentValues that can be inserted into our database.
-     *
-     * @param context         An application context, such as a service or activity context.
-     * @param forecastJsonStr The JSON to parse into ContentValues.
-     *
      * @return An array of ContentValues parsed from the JSON.
      */
     public static ContentValues[] getFullWeatherDataFromJson(Context context, String forecastJsonStr) {

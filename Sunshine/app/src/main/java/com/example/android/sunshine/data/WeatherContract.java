@@ -2,6 +2,9 @@ package com.example.android.sunshine.data;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
+import android.util.Log;
+
+import com.example.android.sunshine.utilities.SunshineDateUtils;
 
 public class WeatherContract {
 
@@ -22,6 +25,16 @@ public class WeatherContract {
         public static final String COLUMN_PRESSURE = "pressure";
         public static final String COLUMN_WIND_SPEED = "wind";
         public static final String COLUMN_DEGREES = "degrees";
+        public static Uri builtWeatherUriWithData(long date){
+            return CONTENT_URI.buildUpon().
+                    appendPath(Long.toString(date)).
+                    build();
+        }
+
+        public static String getSqlSelectForTodayOnwards(){
+            long normaliseUTCNow = SunshineDateUtils.normalizeDate(System.currentTimeMillis());
+            return WeatherEntry.COLUMN_DATE + " >= " + normaliseUTCNow;
+        }
 
     }
 }
