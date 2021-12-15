@@ -3,6 +3,9 @@ package com.example.android.sunshine.utilities;
 import android.content.ContentValues;
 import android.content.Context;
 
+import com.example.android.sunshine.data.SunshinePreferences;
+import com.example.android.sunshine.data.WeatherContract;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,9 +82,8 @@ public final class OpenWeatherJsonUtils {
 
         parsedWeatherData = new String[weatherArray.length()];
 
-        long localDate = System.currentTimeMillis();
-        long utcDate = SunshineDateUtils.getUTCDateFromLocal(localDate);
-        long startDay = SunshineDateUtils.normalizeDate(utcDate);
+
+        long startDay = SunshineDateUtils.getNormalizedUtcDateForToday();
 
         for (int i = 0; i < weatherArray.length(); i++) {
             String date;
@@ -91,6 +93,7 @@ public final class OpenWeatherJsonUtils {
             long dateTimeMillis;
             double high;
             double low;
+            int weatherId;
             String description;
 
             /* Get the JSON object representing the day */
@@ -109,7 +112,8 @@ public final class OpenWeatherJsonUtils {
              */
             JSONObject weatherObject =
                     dayForecast.getJSONArray(OWM_WEATHER).getJSONObject(0);
-            description = weatherObject.getString(OWM_DESCRIPTION);
+            weatherId = weatherObject.getInt(OWM_WEATHER_ID);
+            description = SunshineWeatherUtils.getStringForWeatherCondition(context, weatherId);
 
             /*
              * Temperatures are sent by Open Weather Map in a child object called "temp".
@@ -131,10 +135,71 @@ public final class OpenWeatherJsonUtils {
 
     /**
      * Parse the JSON and convert it into ContentValues that can be inserted into our database.
+     *
      * @return An array of ContentValues parsed from the JSON.
      */
-    public static ContentValues[] getFullWeatherDataFromJson(Context context, String forecastJsonStr) {
-        /** This will be implemented in a future lesson **/
-        return null;
+    public static ContentValues[] getWeatherContentValuesFromJson(Context context, String forecastJsonStr) throws JSONException {
+        JSONObject forecastJson = new JSONObject(forecastJsonStr);
+        if (forecastJson.has(OWM_MESSAGE_CODE)) {
+            int errorCode = forecastJson.getInt(OWM_MESSAGE_CODE);
+            switch (errorCode) {
+                case HttpURLConnection.HTTP_OK:
+                    break;
+                case HttpURLConnection.HTTP_NOT_FOUND:
+                    return null;
+                default:
+                    return null;
+            }
+        }
+
+        JSONArray jsonWeatherArray = forecastJson.getJSONArray(OWM_LIST);
+        JSONObject cityJson = forecastJson.getJSONObject(OWM_CITY);
+        JSONObject citycoord = cityJson.getJSONObject(OWM_COORD);
+        double cityLatittude = citycoord.getDouble(OWM_LATITUDE);
+        double cityLongitude = citycoord.getDouble(OWM_LONGITUDE);
+
+        SunshinePreferences.setLocationDetails(context, cityLatittude, cityLongitude);
+        ContentValues[] weatherContentVAlues = new ContentValues[jsonWeatherArray.length()];
+        long normaliseUtcStartDay = SunshineDateUtils.getNormalizedUtcDateForToday();
+        for (int i = 0; i < jsonWeatherArray.length(); i++) {
+            long dateTimeMillis;
+            double pressure;
+            int humidity;
+            double windSpeed;
+            double windDirection;
+
+            double high;
+            double low;
+
+            int weatherId;
+
+            JSONObject dayForeCast = jsonWeatherArray.getJSONObject(i);
+            dateTimeMillis = normaliseUtcStartDay + SunshineDateUtils.DAY_IN_MILLIS * i;
+            pressure = dayForeCast.getDouble(OWM_PRESSURE);
+            humidity = dayForeCast.getInt(OWM_HUMIDITY);
+            windSpeed = dayForeCast.getDouble(OWM_WINDSPEED);
+            windDirection = dayForeCast.getDouble(OWM_WIND_DIRECTION);
+
+            JSONObject weatherObject = dayForeCast.getJSONArray(OWM_WEATHER).getJSONObject(0);
+            weatherId = weatherObject.getInt(OWM_WEATHER_ID);
+
+            JSONObject temperatureObject = dayForeCast.getJSONObject(OWM_TEMPERATURE);
+            high = temperatureObject.getDouble(OWM_MAX);
+            low = temperatureObject.getDouble(OWM_MIN);
+
+            ContentValues weatherValues = new ContentValues();
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_DATE, dateTimeMillis);
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_HUMIDITY, humidity);
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_PRESSURE, pressure);
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_WIND_SPEED, windSpeed);
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_DEGREES, windDirection);
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_MAX_TEMP, high);
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_MIN_TEMP, low);
+
+            weatherContentVAlues[i] = weatherValues;
+        }
+
+        return weatherContentVAlues;
+
     }
 }

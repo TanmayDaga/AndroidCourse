@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ForecastAdapter extends RecyclerView.Adapter<ForecastAdapter.ForecastAdapterViewHolder>{
 
+
+  
     private String[] mWeatherData;
     private final onClickHandler mClickListener;
 
