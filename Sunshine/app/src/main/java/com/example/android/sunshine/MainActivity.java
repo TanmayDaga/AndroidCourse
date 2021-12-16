@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 
 
 import com.example.android.sunshine.data.SunshinePreferences;
+import com.example.android.sunshine.data.WeatherContract;
 import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
@@ -32,8 +34,7 @@ import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements ForecastAdapter.onClickHandler,
-        LoaderManager.LoaderCallbacks<String[]>,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        LoaderManager.LoaderCallbacks<Cursor>, {
 
     private RecyclerView mRecyclerView;
     private ForecastAdapter mForecastAdapter;
@@ -42,6 +43,20 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    //Column Name of projection
+    public static final String[] MAIN_FORECAST_PROJECTION = {
+
+            WeatherContract.WeatherEntry.COLUMN_DATE,
+            WeatherContract.WeatherEntry.COLUMN_MAX_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_MIN_TEMP,
+            WeatherContract.WeatherEntry.COLUMN_WEATHER_ID
+
+    };
+
+    public static final int INDEX_WEATHER_DATE = 0;
+    public static final int INDEX_WEATHER_MAX_TEMP = 1;
+    public static final int INDEX_WEATHER_MIN_TEMP = 2;
+    public static final int INDEX_WEATHER_ID = 3;
 
     private static final int FORECAST_LOADER_ID = 0;
 
@@ -60,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(true);//Improve performance
-        mForecastAdapter = new ForecastAdapter(this);
+        mForecastAdapter = new ForecastAdapter(this, this);
         mRecyclerView.setAdapter(mForecastAdapter);
 
         int loaderId = FORECAST_LOADER_ID;
@@ -154,6 +169,17 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
 
 
     @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
+
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+
+    }
+
+
+    @Override
     public void onLoadFinished(@NonNull Loader<String[]> loader, String[] data) {
         mForecastAdapter.setmWeatherData(data);
 
@@ -162,11 +188,6 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
         } else {
             showErrorMessage();
         }
-
-    }
-
-    @Override
-    public void onLoaderReset(@NonNull Loader<String[]> loader) {
 
     }
 
