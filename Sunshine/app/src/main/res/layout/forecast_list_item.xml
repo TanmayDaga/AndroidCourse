@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         style="@style/TextAppearance.AppCompat.Large"
-        android:id="@+id/tv_weather_data"/>
+        android:id="@+id/tv_weather_data"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:text="Saturday , October 1 - Sunny - 78/63"/>
 
 <!--    This view serves as visual divider btwn list item-->
 

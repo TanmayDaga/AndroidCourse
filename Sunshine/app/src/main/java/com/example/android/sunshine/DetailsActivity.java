@@ -10,26 +10,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity  {
 
     private static final String FORECAST_SHARE_HASHTAG = "#SunshineApp";
     private String mForecast;
 
-    private TextView mWeatherData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        mWeatherData = (TextView) findViewById(R.id.tv_display_details);
-        Intent intent = getIntent();
-        if (intent != null) {
-            if (intent.hasExtra(Intent.EXTRA_TEXT)) {
-                mForecast = intent.getStringExtra(Intent.EXTRA_TEXT);
-                mWeatherData.setText(mForecast);
-            }
-        }
+
+
     }
     private Intent createSahreForecastIntent(){
         Intent shareIntent = ShareCompat.IntentBuilder.from(this)

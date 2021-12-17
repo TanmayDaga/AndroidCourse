@@ -68,7 +68,7 @@ public class SunshinePreferences {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String keyForLocation = context.getString(R.string.pref_location_key);
-        String defaultLocation = context.getString(R.string.pref_location_defaultValue);
+        String defaultLocation = context.getString(R.string.pref_location_default);
         return sharedPreferences.getString(keyForLocation,defaultLocation);
     }
 
@@ -82,9 +82,9 @@ public class SunshinePreferences {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String keyForUnits = context.getString(R.string.pref_units_key);
-        String defaultUnits = context.getString(R.string.pref_units_metrics_key);
+        String defaultUnits = context.getString(R.string.pref_units_metric);
         String preferredUnits = sharedPreferences.getString(keyForUnits,defaultUnits);
-        String metric = context.getString(R.string.pref_units_metrics_key);
+        String metric = context.getString(R.string.pref_units_imperial);
         boolean userPreferenceMetric;
         if(metric.equals(preferredUnits)){
             userPreferenceMetric = true;
