@@ -48,3 +48,7 @@ https://docs.google.com/document/d/1aLqNtfX95VH3cjqiNu0GUxG_4x_R464yN4e4ZNuDblU/
 Jab bhi database schema me change to update database version
 
 async task loader for network and cursor loader for database;
+
+
+## Android Architecture
+https://docs.google.com/document/d/1OJG4Eth0djU7PsNlGK5V8rklucik2DcoaQe5RWvKl_Q/edit?usp=sharing
