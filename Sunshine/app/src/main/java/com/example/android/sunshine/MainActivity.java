@@ -138,14 +138,13 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
     }
 
 
-    public void onClick(String weatherForDAy) {
+    public void onClick(long date) {
 
-        Context context = this;
-        Class destinationActivity = DetailsActivity.class;
 
-        Intent intentToStartDetailsActivity = new Intent(context, destinationActivity);
+        Intent intentToStartDetailsActivity = new Intent(MainActivity.this, DetailsActivity.class);
 
-        intentToStartDetailsActivity.putExtra(Intent.EXTRA_TEXT, weatherForDAy);
+        Uri uriForDateClick = WeatherContract.WeatherEntry.builtWeatherUriWithDate(date);
+        intentToStartDetailsActivity.setData(uriForDateClick);
 
         startActivity(intentToStartDetailsActivity);
 
