@@ -1,5 +1,3 @@
-
-
 package com.example.android.todolist;
 
 import android.content.Context;
@@ -119,6 +117,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
             return 0;
         }
         return mTaskEntries.size();
+    }
+
+    public List<TaskEntry> getTasks(){
+        return mTaskEntries;
     }
 
     /**

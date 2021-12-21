@@ -10,7 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
+import com.example.android.todolist.database.AppDatabase;
 import com.example.android.todolist.database.TaskEntry;
+
+import java.util.Date;
 
 
 public class AddTaskActivity extends AppCompatActivity {
@@ -34,11 +41,15 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private int mTaskId = DEFAULT_TASK_ID;
 
+    private AppDatabase mDb;//Member variable for database
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
 
         initViews();
+
+        mDb = AppDatabase.getInstance(getApplicationContext());
 
         if (savedInstanceState != null && savedInstanceState.containsKey(INSTANCE_TASK_ID)) {
             mTaskId = savedInstanceState.getInt(INSTANCE_TASK_ID, DEFAULT_TASK_ID);
@@ -48,7 +59,18 @@ public class AddTaskActivity extends AppCompatActivity {
         if (intent != null && intent.hasExtra(EXTRA_TASK_ID)) {
             mButton.setText(R.string.update_button);
             if (mTaskId == DEFAULT_TASK_ID) {
-                // populate the UI
+                mTaskId = intent.getIntExtra(EXTRA_TASK_ID, DEFAULT_TASK_ID);
+
+                final LiveData<TaskEntry> task = mDb.taskDao().loadTaskById(mTaskId);
+                task.observe((LifecycleOwner) this, new Observer<TaskEntry>() {
+                    @Override
+                    public void onChanged(TaskEntry taskEntry) {
+                        task.removeObserver(this);
+                       populateUI(taskEntry);
+                    }
+                });
+
+
             }
         }
     }
@@ -81,15 +103,39 @@ public class AddTaskActivity extends AppCompatActivity {
      * @param task the taskEntry to populate the UI
      */
     private void populateUI(TaskEntry task) {
-
+        if (task == null) {
+            return;
+        }
+        mEditText.setText(task.getDescription());
+        setPriorityInViews(task.getPriority());
     }
 
-    /**
-     * onSaveButtonClicked is called when the "save" button is clicked.
-     * It retrieves user input and inserts that new task data into the underlying database.
-     */
     public void onSaveButtonClicked() {
-        // Not yet implemented
+        String description = mEditText.getText().toString();
+        int priority = getPriorityFromViews();
+        Date date = new Date();
+
+        final TaskEntry task = new TaskEntry(description, priority, date);
+
+        AppExecutors.getsInstance().diskIo().execute(new Runnable() {
+            @Override
+            public void run() {
+
+                if (mTaskId == DEFAULT_TASK_ID) {
+                    mDb.taskDao().insertTask(task);
+
+                } else {
+//                    update task
+                    task.setId(mTaskId);
+                    mDb.taskDao().updateTask(task);
+                }
+
+                finish();
+
+            }
+        });
+
+
     }
 
     /**

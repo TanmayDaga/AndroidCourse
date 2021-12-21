@@ -1,5 +1,6 @@
 package com.example.android.todolist.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -14,7 +15,7 @@ import java.util.List;
 public interface TaskDao  {
 
     @Query("select * FROM task ORDER BY priority")
-    List<TaskEntry> loadAllTasks();
+    LiveData<List<TaskEntry>> loadAllTasks();
 
     @Insert
     void insertTask(TaskEntry taskEntry);
@@ -23,7 +24,11 @@ public interface TaskDao  {
     void updateTask(TaskEntry taskEntry);
 
     @Delete
-    void deleteTask(TaskEntry taskEntry);
+    void deleteTask(TaskEntry taskEntry);//Vo task entry jo delete karni hain
+
+
+    @Query("SELECT * FROM task WHERE id = :id")
+    LiveData<TaskEntry> loadTaskById(int id);
 
 
 }
