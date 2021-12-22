@@ -24,7 +24,7 @@
 
     <!-- TextView and FrameLayout (which contains buttons) for Priority Selection -->
     <TextView
-        style="@style/TextAppearance.AppCompat.Medium"
+        style="@style/TextAppearance.Appcompact.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -76,7 +76,7 @@
     <!-- Add button -->
     <Button
         android:id="@+id/saveButton"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.Appcompact.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
