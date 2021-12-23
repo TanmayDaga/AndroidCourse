@@ -23,13 +23,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements CustomCursorAdapter.ItemClickListener {
 
     // Constant for logging
     private static final String TAG = MainActivity.class.getSimpleName();
     // Member variables for the adapter and RecyclerView
     private RecyclerView mRecyclerView;
-    private TaskAdapter mAdapter;
+    private CustomCursorAdapter mAdapter;
 
 
     private AppDatabase mDb;
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.ItemC
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize the adapter and attach it to the RecyclerView
-        mAdapter = new TaskAdapter(this, this);
+        mAdapter = new CustomCursorAdapter(this, this);
         mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);

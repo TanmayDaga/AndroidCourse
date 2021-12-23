@@ -21,7 +21,7 @@ import java.util.Locale;
  * This TaskAdapter creates and binds ViewHolders, that hold the description and priority of a task,
  * to a RecyclerView to efficiently display data.
  */
-public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
+public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapter.TaskViewHolder> {
 
     // Constant for date format
     private static final String DATE_FORMAT = "dd/MM/yyy";
@@ -40,7 +40,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
      * @param context  the current Context
      * @param listener the ItemClickListener
      */
-    public TaskAdapter(Context context, ItemClickListener listener) {
+    public CustomCursorAdapter(Context context, ItemClickListener listener) {
         mContext = context;
         mItemClickListener = listener;
     }
