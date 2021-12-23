@@ -1,6 +1,7 @@
 package com.example.android.todolist;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.drawable.GradientDrawable;
 
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.todolist.database.TaskContract;
 import com.example.android.todolist.database.TaskEntry;
 
 import java.text.SimpleDateFormat;
@@ -23,16 +25,11 @@ import java.util.Locale;
  */
 public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapter.TaskViewHolder> {
 
-    // Constant for date format
-    private static final String DATE_FORMAT = "dd/MM/yyy";
 
-    // Member variable to handle item clicks
-    final private ItemClickListener mItemClickListener;
-    // Class variables for the List that holds task data and the Context
-    private List<TaskEntry> mTaskEntries;
+
     private Context mContext;
-    // Date formatter
-    private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+    private Cursor mCursor;
+
 
     /**
      * Constructor for the TaskAdapter that initializes the Context.
@@ -40,16 +37,12 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
      * @param context  the current Context
      * @param listener the ItemClickListener
      */
-    public CustomCursorAdapter(Context context, ItemClickListener listener) {
-        mContext = context;
-        mItemClickListener = listener;
+    public CustomCursorAdapter(Context context) {
+       this.mContext = context;
+
     }
 
-    /**
-     * Called when ViewHolders are created to fill a RecyclerView.
-     *
-     * @return A new TaskViewHolder that holds the view for each task
-     */
+
     @Override
     public TaskViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Inflate the task_layout to a view
@@ -59,19 +52,10 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
         return new TaskViewHolder(view);
     }
 
-    /**
-     * Called by the RecyclerView to display data at a specified position in the Cursor.
-     *
-     * @param holder   The ViewHolder to bind Cursor data to
-     * @param position The position of the data in the Cursor
-     */
     @Override
     public void onBindViewHolder(TaskViewHolder holder, int position) {
         // Determine the values of the wanted data
-        TaskEntry taskEntry = mTaskEntries.get(position);
-        String description = taskEntry.getDescription();
-        int priority = taskEntry.getPriority();
-        String updatedAt = dateFormat.format(taskEntry.getUpdatedAt());
+        int idIndex = mCursor.getColumnIndex(TaskContract.TaskEntry._ID);
 
         //Set values
         holder.taskDescriptionView.setText(description);
