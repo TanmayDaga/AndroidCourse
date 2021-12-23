@@ -4,7 +4,6 @@ import android.app.Application;
 import android.util.Log;
 
 
-
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -18,17 +17,16 @@ public class MainViewModel extends AndroidViewModel {
     private LiveData<List<TaskEntry>> tasks;
     private static final String TAG = MainViewModel.class.getSimpleName();
 
-    public MainViewModel( Application application) {
+    public MainViewModel(Application application) {
         super(application);
         AppDatabase database = AppDatabase.getInstance(this.getApplication());
 
-        Log.d(TAG,"Actively retrieving data from database");
+        Log.d(TAG, "Actively retrieving data from database");
         tasks = database.taskDao().loadAllTasks();
 
     }
 
-    public LiveData<List<TaskEntry>> getTasks()
-    {
+    public LiveData<List<TaskEntry>> getTasks() {
         return tasks;
     }
 

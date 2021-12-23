@@ -4,17 +4,16 @@ package com.example.android.todolist;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
+
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import com.example.android.todolist.database.AppDatabase;
 import com.example.android.todolist.database.TaskEntry;
 
@@ -62,12 +61,17 @@ public class AddTaskActivity extends AppCompatActivity {
             if (mTaskId == DEFAULT_TASK_ID) {
                 mTaskId = intent.getIntExtra(EXTRA_TASK_ID, DEFAULT_TASK_ID);
 
-                final LiveData<TaskEntry> task = mDb.taskDao().loadTaskById(mTaskId);
-                task.observe((LifecycleOwner) this, new Observer<TaskEntry>() {
+
+                AddTaskViewModelFactory factory = new AddTaskViewModelFactory(mDb, mTaskId);
+                AddTaskViewModel addTaskViewModel =
+                        ViewModelProviders.of(this, factory).get(AddTaskViewModel.class);
+
+
+                addTaskViewModel.getTask().observe((LifecycleOwner) this, new Observer<TaskEntry>() {
                     @Override
                     public void onChanged(TaskEntry taskEntry) {
-                        task.removeObserver(this);
-                       populateUI(taskEntry);
+                        addTaskViewModel.getTask().removeObserver(this);
+                        populateUI(taskEntry);
                     }
                 });
 
