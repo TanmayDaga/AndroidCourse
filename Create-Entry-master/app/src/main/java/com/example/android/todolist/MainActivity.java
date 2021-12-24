@@ -3,36 +3,36 @@
 package com.example.android.todolist;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.view.View;
 
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DividerItemDecoration;
+
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
+import androidx.loader.content.Loader;
+
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.android.todolist.database.AppDatabase;
-import com.example.android.todolist.database.TaskEntry;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
 
-
-public class MainActivity extends AppCompatActivity implements CustomCursorAdapter.ItemClickListener {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     // Constant for logging
     private static final String TAG = MainActivity.class.getSimpleName();
     // Member variables for the adapter and RecyclerView
     private RecyclerView mRecyclerView;
     private CustomCursorAdapter mAdapter;
+    private static final int TASK_LOADER_ID = 0;
 
-
-    private AppDatabase mDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,46 +47,24 @@ public class MainActivity extends AppCompatActivity implements CustomCursorAdapt
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Initialize the adapter and attach it to the RecyclerView
-        mAdapter = new CustomCursorAdapter(this, this);
+        mAdapter = new CustomCursorAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
-        mRecyclerView.addItemDecoration(decoration);
 
-        /*
-         Add a touch helper to the RecyclerView to recognize when a user swipes to delete an item.
-         An ItemTouchHelper enables touch behavior (like swipe and move) on each ViewHolder,
-         and uses callbacks to signal when a user is performing these actions.
-         */
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
             }
 
-            // Called when a user swipes left or right on a ViewHolder
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
 
 
-                AppExecutors.getsInstance().diskIo().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        int position = viewHolder.getAdapterPosition();
-                        List<TaskEntry> tasks = mAdapter.getTasks();
-                        mDb.taskDao().deleteTask(tasks.get(position));
-
-
-                    }
-                });
             }
         }).attachToRecyclerView(mRecyclerView);
 
-        /*
-         Set the Floating Action Button (FAB) to its corresponding View.
-         Attach an OnClickListener to it, so that when it's clicked, a new intent will be created
-         to launch the AddTaskActivity.
-         */
+
         FloatingActionButton fabButton = findViewById(R.id.fab);
 
         fabButton.setOnClickListener(new View.OnClickListener() {
@@ -98,35 +76,55 @@ public class MainActivity extends AppCompatActivity implements CustomCursorAdapt
             }
         });
 
-        mDb = AppDatabase.getInstance(getApplicationContext());
-        setupViewModel();
+        getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
 
 
     }
 
 
-    private void setupViewModel() {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
+    }
 
-        MainViewModel viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, final Bundle loaderArgs) {
+        return new AsyncTaskLoader<Cursor>(this) {
+            Cursor mTaskData = null;
 
-        viewModel.getTasks().observe((LifecycleOwner) this, new Observer<List<TaskEntry>>() {
             @Override
-            public void onChanged(List<TaskEntry> taskEntries) {
-
-                Log.d(TAG, "receiving database update from live data");
-                mAdapter.setTasks(taskEntries);
+            protected void onStartLoading() {
+                if (mTaskData == null) {
+                    deliverResult(mTaskData);
+                } else {
+                    forceLoad();
+                }
             }
-        });
+
+            @Nullable
+            @Override
+            public Cursor loadInBackground() {
+                return null;
+            }
+
+            @Override
+            public void deliverResult(@Nullable Cursor data) {
+                mTaskData = data;
+                super.deliverResult(data);
+            }
+        };
 
 
     }
 
     @Override
-    public void onItemClickListener(int itemId) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mAdapter.swapCursor(data);
+    }
 
-        Intent intent = new Intent(MainActivity.this, AddTaskActivity.class);
-        intent.putExtra(AddTaskActivity.EXTRA_TASK_ID, itemId);
-        startActivity(intent);
-
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
     }
 }

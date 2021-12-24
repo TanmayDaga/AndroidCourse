@@ -3,6 +3,7 @@ package com.example.android.todolist.database;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
 
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 public class TaskProvider extends ContentProvider {
 
     private TaskDbHelper mTaskDbHelper;
+    private UriMatcher sUriMatcher;
 
     @Override
     public boolean onCreate() {

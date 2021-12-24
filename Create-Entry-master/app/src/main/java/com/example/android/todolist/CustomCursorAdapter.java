@@ -13,11 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.todolist.database.TaskContract;
-import com.example.android.todolist.database.TaskEntry;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * This TaskAdapter creates and binds ViewHolders, that hold the description and priority of a task,
@@ -26,19 +22,12 @@ import java.util.Locale;
 public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapter.TaskViewHolder> {
 
 
-
     private Context mContext;
     private Cursor mCursor;
 
 
-    /**
-     * Constructor for the TaskAdapter that initializes the Context.
-     *
-     * @param context  the current Context
-     * @param listener the ItemClickListener
-     */
     public CustomCursorAdapter(Context context) {
-       this.mContext = context;
+        this.mContext = context;
 
     }
 
@@ -56,11 +45,21 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
     public void onBindViewHolder(TaskViewHolder holder, int position) {
         // Determine the values of the wanted data
         int idIndex = mCursor.getColumnIndex(TaskContract.TaskEntry._ID);
+        int descriptionIndex = mCursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_DESCRIPTION);
+        int priorityIndex = mCursor.getColumnIndex(TaskContract.TaskEntry.COLUMN_PRIORITY);
+
+        mCursor.moveToPosition(position);
+
+
+        //Determine values
+        final int id = mCursor.getInt(idIndex);
+        String description = mCursor.getString(descriptionIndex);
+        int priority = mCursor.getInt(priorityIndex);
+
 
         //Set values
+        holder.itemView.getTag(id);
         holder.taskDescriptionView.setText(description);
-        holder.updatedAtView.setText(updatedAt);
-
         // Programmatically set the text and color for the priority TextView
         String priorityString = "" + priority; // converts int to String
         holder.priorityView.setText(priorityString);
@@ -99,35 +98,32 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
      */
     @Override
     public int getItemCount() {
-        if (mTaskEntries == null) {
+        if (mCursor == null) {
             return 0;
         }
-        return mTaskEntries.size();
+        return mCursor.getCount();
     }
 
-    public List<TaskEntry> getTasks(){
-        return mTaskEntries;
-    }
 
-    /**
-     * When data changes, this method updates the list of taskEntries
-     * and notifies the adapter to use the new values on it
-     */
-    public void setTasks(List<TaskEntry> taskEntries) {
-        mTaskEntries = taskEntries;
-        notifyDataSetChanged();
-    }
+    public Cursor swapCursor(Cursor newCursor) {
+        if (mCursor == newCursor) {
+            return null;
+        }
 
-    public interface ItemClickListener {
-        void onItemClickListener(int itemId);
+        Cursor temp = mCursor;
+        mCursor = newCursor;
+
+        if (newCursor != null) {
+            notifyDataSetChanged();
+        }
+        return temp;
     }
 
     // Inner class for creating ViewHolders
-    class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class TaskViewHolder extends RecyclerView.ViewHolder {
 
         // Class variables for the task description and priority TextViews
         TextView taskDescriptionView;
-        TextView updatedAtView;
         TextView priorityView;
 
         /**
@@ -138,16 +134,12 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
         public TaskViewHolder(View itemView) {
             super(itemView);
 
-            taskDescriptionView = itemView.findViewById(R.id.taskDescription);
-            updatedAtView = itemView.findViewById(R.id.taskUpdatedAt);
-            priorityView = itemView.findViewById(R.id.priorityTextView);
-            itemView.setOnClickListener(this);
+            taskDescriptionView = (TextView) itemView.findViewById(R.id.taskDescription);
+
+            priorityView = (TextView) itemView.findViewById(R.id.priorityTextView);
+
         }
 
-        @Override
-        public void onClick(View view) {
-            int elementId = mTaskEntries.get(getAdapterPosition()).getId();
-            mItemClickListener.onItemClickListener(elementId);
-        }
+
     }
 }
