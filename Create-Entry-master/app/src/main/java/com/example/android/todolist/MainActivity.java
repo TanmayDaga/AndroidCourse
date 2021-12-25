@@ -4,23 +4,19 @@ package com.example.android.todolist;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-
+import android.util.Log;
 import android.view.View;
-
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
-
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-
+import com.example.android.todolist.database.TaskContract;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
@@ -59,7 +55,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                int id = (int) viewHolder.itemView.getTag();
+                String stringId = Integer.toString(id);
+                Uri uri = TaskContract.TaskEntry.CONTENT_URI;
+                uri.buildUpon().appendPath(stringId).build();
 
+                getContentResolver().delete(uri,null,null);
+
+                getSupportLoaderManager().restartLoader(TASK_LOADER_ID,null,MainActivity.this);
 
             }
         }).attachToRecyclerView(mRecyclerView);
@@ -105,7 +108,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             @Nullable
             @Override
             public Cursor loadInBackground() {
-                return null;
+
+                try {
+                    return  getContentResolver().query(TaskContract.TaskEntry.CONTENT_URI,
+                            null,
+                            null,
+                            null,
+                            TaskContract.TaskEntry.COLUMN_PRIORITY);
+                }catch (Exception e){
+                    Log.d(TAG,"failed to load data");
+                    e.printStackTrace();
+                    return null;
+                }
+
             }
 
             @Override
