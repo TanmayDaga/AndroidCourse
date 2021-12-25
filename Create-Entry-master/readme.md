@@ -1,0 +1,3 @@
+## Screenshots
+<img src = "https://raw.githubusercontent.com/TanmayDaga/AndroidCourseZainFarhan/main/Photos%20for%20different%20Apps/Create%20Entry%20Master/Screenshot%202021-12-25%20at%2010.22.20%20AM.png"/>
+<img src = "https://raw.githubusercontent.com/TanmayDaga/AndroidCourseZainFarhan/main/Photos%20for%20different%20Apps/Create%20Entry%20Master/Screenshot%202021-12-25%20at%2010.25.43%20AM.png">
