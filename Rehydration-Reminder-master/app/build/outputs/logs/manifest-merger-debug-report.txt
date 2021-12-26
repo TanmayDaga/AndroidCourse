@@ -1,12 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
-INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
-INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
-INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
+ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
 MERGED from [com.google.android.material:material:1.4.0] /Users/tanmay06daga/.gradle/caches/transforms-3/1508bc0f4d67cb1fb46dec23183d0585/transformed/material-1.4.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/tanmay06daga/.gradle/caches/transforms-3/6c9c97615cfc1e30abc2ed961985f2e8/transformed/constraintlayout-2.0.4/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/tanmay06daga/.gradle/caches/transforms-3/343ad6cc2b3ed66b253e05c22b267c81/transformed/appcompat-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:17:1-42:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/tanmay06daga/.gradle/caches/transforms-3/3504aa656f9d00f9e2cadffb281d01d0/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.3.4] /Users/tanmay06daga/.gradle/caches/transforms-3/c80f748c12cd6a3c65f11ec019acbe76/transformed/fragment-1.3.4/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.activity:activity:1.2.3] /Users/tanmay06daga/.gradle/caches/transforms-3/e28acb3c17f67da8dfde12975612c5c8/transformed/activity-1.2.3/AndroidManifest.xml:17:1-24:12
@@ -39,20 +40,20 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/tanmay06daga/.grad
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/tanmay06daga/.gradle/caches/transforms-3/30559646bdc9f3290097ba378eb99203/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /Users/tanmay06daga/.gradle/caches/transforms-3/b618f929228947d1fd03b4a852d85b00/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/tanmay06daga/.gradle/caches/transforms-3/78759bb9014001eef7850905c2fbbc44/transformed/annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
-INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
-INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
-INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
+INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
 	package
 		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:3:5-45
 		INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
-		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
+		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
 		INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
-		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-30:12
+		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:1-37:12
 		INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:2:11-69
@@ -61,11 +62,13 @@ ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Reh
 	android:name
 		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:5:22-63
 application
-ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:6:5-26:19
+ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:6:5-33:19
 MERGED from [com.google.android.material:material:1.4.0] /Users/tanmay06daga/.gradle/caches/transforms-3/1508bc0f4d67cb1fb46dec23183d0585/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.4.0] /Users/tanmay06daga/.gradle/caches/transforms-3/1508bc0f4d67cb1fb46dec23183d0585/transformed/material-1.4.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/tanmay06daga/.gradle/caches/transforms-3/6c9c97615cfc1e30abc2ed961985f2e8/transformed/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/tanmay06daga/.gradle/caches/transforms-3/6c9c97615cfc1e30abc2ed961985f2e8/transformed/constraintlayout-2.0.4/AndroidManifest.xml:9:5-20
+MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:26:5-40:19
+MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:26:5-40:19
 MERGED from [androidx.core:core:1.5.0] /Users/tanmay06daga/.gradle/caches/transforms-3/8091e88265a2bdec2561f7dc53bbc273/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.5.0] /Users/tanmay06daga/.gradle/caches/transforms-3/8091e88265a2bdec2561f7dc53bbc273/transformed/core-1.5.0/AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/tanmay06daga/.gradle/caches/transforms-3/8a9cae927f9316cf7d269ce5dd3eaa14/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
@@ -108,6 +111,18 @@ ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Reh
 		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:24:13-37
 	android:name
 		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:23:18-65
+service#com.example.android.background.sync.WaterReminderFirebaseJobService
+ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:27:9-32:19
+	android:exported
+		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:28:13-37
+	android:name
+		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:27:18-70
+intent-filter#action:name:com.firebase.jobdispatcher.ACTION_EXECUTE
+ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:29:13-31:29
+action#com.firebase.jobdispatcher.ACTION_EXECUTE
+ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:30:17-83
+	android:name
+		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:30:25-81
 uses-sdk
 INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
@@ -118,6 +133,8 @@ MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/tanmay06da
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.4] /Users/tanmay06daga/.gradle/caches/transforms-3/6c9c97615cfc1e30abc2ed961985f2e8/transformed/constraintlayout-2.0.4/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/tanmay06daga/.gradle/caches/transforms-3/343ad6cc2b3ed66b253e05c22b267c81/transformed/appcompat-1.3.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.3.0] /Users/tanmay06daga/.gradle/caches/transforms-3/343ad6cc2b3ed66b253e05c22b267c81/transformed/appcompat-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:22:5-24:41
+MERGED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:22:5-24:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/tanmay06daga/.gradle/caches/transforms-3/3504aa656f9d00f9e2cadffb281d01d0/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/tanmay06daga/.gradle/caches/transforms-3/3504aa656f9d00f9e2cadffb281d01d0/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.3.4] /Users/tanmay06daga/.gradle/caches/transforms-3/c80f748c12cd6a3c65f11ec019acbe76/transformed/fragment-1.3.4/AndroidManifest.xml:20:5-22:41
@@ -192,3 +209,17 @@ INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/
 		INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
 		ADDED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml
+service#com.firebase.jobdispatcher.GooglePlayReceiver
+ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:32:9-39:19
+	android:exported
+		ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:34:13-36
+	android:permission
+		ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:35:13-93
+	android:name
+		ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:33:13-73
+intent-filter#action:name:com.google.android.gms.gcm.ACTION_TASK_READY
+ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:36:13-38:29
+action#com.google.android.gms.gcm.ACTION_TASK_READY
+ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:37:17-87
+	android:name
+		ADDED from [com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:37:25-84

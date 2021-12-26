@@ -12,20 +12,20 @@
         "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/generated/res/pngs/debug/drawable-xxhdpi/ic_power_grey_80px.png"
     },
     {
-        "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-mdpi-v11_ic_drink_notification.png.flat",
-        "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/res/drawable-mdpi-v11/ic_drink_notification.png"
-    },
-    {
-        "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-xxxhdpi_ic_launcher_background.png.flat",
-        "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_launcher_background.png"
+        "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_local_drink_grey_120px.png.flat",
+        "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/generated/res/pngs/debug/drawable-xxhdpi/ic_local_drink_grey_120px.png"
     },
     {
         "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
     },
     {
-        "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_local_drink_grey_120px.png.flat",
-        "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/generated/res/pngs/debug/drawable-xxhdpi/ic_local_drink_grey_120px.png"
+        "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-xxxhdpi_ic_launcher_background.png.flat",
+        "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/generated/res/pngs/debug/drawable-xxxhdpi/ic_launcher_background.png"
+    },
+    {
+        "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-mdpi-v11_ic_drink_notification.png.flat",
+        "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/res/drawable-mdpi-v11/ic_drink_notification.png"
     },
     {
         "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-xxxhdpi_ic_local_drink_black_24px.png.flat",
@@ -56,12 +56,12 @@
         "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/generated/res/pngs/debug/drawable-anydpi-v21/ic_power_grey_80px.xml"
     },
     {
-        "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_launcher_background.png.flat",
-        "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/generated/res/pngs/debug/drawable-xxhdpi/ic_launcher_background.png"
-    },
-    {
         "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-xxhdpi_ic_launcher_background.png.flat",
+        "source": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/generated/res/pngs/debug/drawable-xxhdpi/ic_launcher_background.png"
     },
     {
         "merged": "/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/build/intermediates/merged_res/debug/drawable-anydpi-v21_ic_local_drink_black_24px.xml.flat",

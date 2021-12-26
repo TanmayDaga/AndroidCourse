@@ -15,7 +15,7 @@
 11-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:5:22-63
 12
 13    <application
-13-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:6:5-26:19
+13-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:6:5-33:19
 14        android:allowBackup="true"
 14-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:7:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -58,6 +58,38 @@
 35-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:23:18-65
 36            android:exported="false" />
 36-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:24:13-37
-37    </application>
-38
-39</manifest>
+37        <service
+37-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:27:9-32:19
+38            android:name="com.example.android.background.sync.WaterReminderFirebaseJobService"
+38-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:27:18-70
+39            android:exported="false" >
+39-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:28:13-37
+40            <intent-filter>
+40-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:29:13-31:29
+41                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+41-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:30:17-83
+41-->/Users/tanmay06daga/Documents/Programming/AndroidCourseZainFarhan/Rehydration-Reminder-master/app/src/main/AndroidManifest.xml:30:25-81
+42            </intent-filter>
+43        </service>
+44        <!--
+45             Receives GooglePlay execution requests and forwards them to the
+46             appropriate internal service.
+47        -->
+48        <service
+48-->[com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:32:9-39:19
+49            android:name="com.firebase.jobdispatcher.GooglePlayReceiver"
+49-->[com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:33:13-73
+50            android:exported="true"
+50-->[com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:34:13-36
+51            android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE" >
+51-->[com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:35:13-93
+52            <intent-filter>
+52-->[com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:36:13-38:29
+53                <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY" />
+53-->[com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:37:17-87
+53-->[com.firebase:firebase-jobdispatcher:0.8.5] /Users/tanmay06daga/.gradle/caches/transforms-3/aed03f3c94f72c75812171167fcb7cca/transformed/jetified-firebase-jobdispatcher-0.8.5/AndroidManifest.xml:37:25-84
+54            </intent-filter>
+55        </service>
+56    </application>
+57
+58</manifest>
