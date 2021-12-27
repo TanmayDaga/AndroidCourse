@@ -2,8 +2,13 @@ package com.example.android.background;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.BatteryManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -26,6 +31,9 @@ public class MainActivity extends AppCompatActivity  implements
 
     private Toast mToast;
 
+    IntentFilter chargingIntentFilter;
+    ChargingBrodacastREciever mChargingReciver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +53,39 @@ public class MainActivity extends AppCompatActivity  implements
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
 
+        chargingIntentFilter = new IntentFilter();
+        chargingIntentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
+        chargingIntentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        mChargingReciver = new ChargingBrodacastREciever();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
+
+            BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
+            showCharging(batteryManager.isCharging());
+
+        }
+        else {
+            IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+            Intent curBatteryIntetn = registerReceiver(null,intentFilter);
+            int batteryStatus = curBatteryIntetn.getIntExtra(BatteryManager.EXTRA_STATUS,-1);
+            boolean isCharging = batteryStatus == BatteryManager.
+                    BATTERY_STATUS_CHARGING || batteryStatus == BatteryManager.BATTERY_STATUS_FULL ;
+
+            showCharging(isCharging);
+        }
+
+        registerReceiver(mChargingReciver,chargingIntentFilter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mChargingReciver);
     }
 
     /**
@@ -101,6 +141,25 @@ public class MainActivity extends AppCompatActivity  implements
             updateWaterCount();
         } else if (PreferenceUtilities.KEY_CHARGING_REMINDER_COUNT.equals(key)) {
             updateChargingReminderCount();
+        }
+    }
+
+    private void showCharging (boolean isCharging){
+        if(isCharging){
+            mChargingImageView.setImageResource(R.drawable.ic_power_pink_80px);
+        }
+        else {
+            mChargingImageView.setImageResource(R.drawable.ic_local_drink_grey_120px);
+        }
+    }
+
+    private class ChargingBrodacastREciever extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction().toString();
+            boolean isCharging = (action.equals(Intent.ACTION_POWER_CONNECTED));
+            showCharging(isCharging);
         }
     }
 }
