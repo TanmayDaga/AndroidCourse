@@ -12,6 +12,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
+import com.example.android.sunshine.sync.SunshineSyncUtil;
 
 public class SettingsFragment extends PreferenceFragmentCompat implements SharedPreferences.OnSharedPreferenceChangeListener{
 
@@ -68,6 +69,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Shared
         Activity activity = getActivity();
         if(key.equals(getString(R.string.pref_location_key))){
             SunshinePreferences.resetLocationCoordinates(activity);
+            SunshineSyncUtil.startImmediateSync(activity);
 
         }
         else if(key.equals(R.string.pref_units_key)){

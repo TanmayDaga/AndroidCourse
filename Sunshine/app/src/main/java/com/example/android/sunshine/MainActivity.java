@@ -28,7 +28,8 @@ import android.widget.TextView;
 
 import com.example.android.sunshine.data.SunshinePreferences;
 import com.example.android.sunshine.data.WeatherContract;
-import com.example.android.sunshine.utilities.FakeDataUtils;
+import com.example.android.sunshine.sync.SunshineSyncUtil;
+
 import com.example.android.sunshine.utilities.NetworkUtils;
 import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
-        FakeDataUtils.insertFakeData(this);
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_forecast);
         mLoadingIndicator = (ProgressBar) findViewById(R.id.progress_bar);
@@ -84,10 +85,11 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
         showLoading();
         getSupportLoaderManager().initLoader(ID_FORECAST_LOADER, null, this);
 
+        SunshineSyncUtil.initialize(this);
     }
 
 
-    private void openPreferedLocationInMap() {
+    private void openPrefferedLocationInMap() {
 
         double[] locationCoordinates = SunshinePreferences.getLocationCoordinates(this);
         String posLat = Double.toString(locationCoordinates[0]);
@@ -176,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
             return true;
         }
         if (id == R.id.action_map) {
-            openPreferedLocationInMap();
+            openPrefferedLocationInMap();
             return true;
         }
 
