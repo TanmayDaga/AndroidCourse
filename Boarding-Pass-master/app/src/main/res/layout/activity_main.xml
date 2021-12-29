@@ -1,31 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+            android:id="@+id/scroll"
+            android:layout_width="286dp"
+            android:layout_height="617dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
 
-    <TextView
-            android:text="@string/passenger_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewPassengerLabel"
-            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp" android:layout_marginStart="16dp"/>
-    <TextView
-            tools:text="@string/passenger_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/textViewPassengerName"
-            app:layout_constraintTop_toBottomOf="@+id/textViewPassengerLabel"
-            app:layout_constraintEnd_toEndOf="@+id/textViewPassengerLabel"
-            app:layout_constraintStart_toStartOf="@+id/textViewPassengerLabel"
-            android:layout_marginTop="8dp" app:layout_constraintHorizontal_bias="0.0"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="@color/colorPrimary"
-            />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    android:id="@+id/textViewPassengerLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/passenger_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
+            <TextView
+                    android:id="@+id/textViewPassengerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@color/colorPrimary"
+                    app:layout_constraintStart_toStartOf="@+id/textViewPassengerLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPassengerLabel"
+                    tools:text="@string/passenger_name"/>
+
+            <include
+                    android:id="@+id/flight_info"
+                    layout="@layout/flight_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPassengerName"/>
+
+
+            <TextView
+                    android:id="@+id/textViewBoardingTimeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/boarding_time_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/flight_info"/>
+
+            <TextView
+                    android:id="@+id/textViewBoardingTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@android:color/black"
+                    app:layout_constraintStart_toStartOf="@+id/textViewBoardingTimeLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewBoardingTimeLabel"
+                    tools:text="@string/boarding_time"/>
+
+            <TextView
+                    android:id="@+id/textViewDepartureTimeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/departure_time_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    app:layout_constraintStart_toStartOf="@+id/textViewBoardingTime"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewBoardingTime"/>
+
+            <TextView
+                    android:id="@+id/textViewDepartureTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textColor="@color/colorGood"
+                    app:layout_constraintStart_toStartOf="@+id/textViewDepartureTimeLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewDepartureTimeLabel"
+                    tools:text="@string/departure_time"/>
+
+            <TextView
+                    android:id="@+id/textViewBoardingInTimeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/boarding_in_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textViewBoardingTimeLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/flight_info"/>
+
+            <TextView
+                    android:id="@+id/textViewBoardingInCountdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textColor="@color/colorBad"
+                    app:layout_constraintStart_toStartOf="@+id/textViewBoardingInTimeLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewBoardingInTimeLabel"
+                    tools:text="@string/boarding_in_time"/>
+
+            <TextView
+                    android:id="@+id/textViewArrivalTimeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/arrival_time_label"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                    app:layout_constraintStart_toStartOf="@+id/textViewBoardingInCountdown"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewBoardingInCountdown"/>
+
+            <TextView
+                    android:id="@+id/textViewArrivalTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textColor="@color/colorGood"
+                    app:layout_constraintStart_toStartOf="@+id/textViewArrivalTimeLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewArrivalTimeLabel"
+                    tools:text="@string/arrival_time"/>
+
+            <include
+                    android:id="@+id/boarding_info"
+                    layout="@layout/boarding_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewArrivalTime"/>
+
+
+            <ImageView
+                    android:id="@+id/barcode"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/boarding_info"
+                    app:srcCompat="@mipmap/barcode"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
