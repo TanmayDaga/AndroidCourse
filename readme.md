@@ -52,3 +52,9 @@ async task loader for network and cursor loader for database;
 
 ## Android Architecture
 https://docs.google.com/document/d/1OJG4Eth0djU7PsNlGK5V8rklucik2DcoaQe5RWvKl_Q/edit?usp=sharing
+
+## Services
+https://docs.google.com/document/d/1c8MsbrRQ81cU8UjhGsOJMPtKD0-Jdwm8ITYMI2QPZ7g/edit?usp=sharing
+
+##Designig
+https://docs.google.com/document/d/1S9sINlkegA3QK1GaQBho45r0_09miKURMaN7fx_zf6Q/edit?usp=sharing

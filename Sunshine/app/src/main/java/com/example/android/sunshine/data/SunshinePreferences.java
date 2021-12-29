@@ -11,7 +11,6 @@ import com.example.android.sunshine.R;
 public class SunshinePreferences {
 
 
-
     /*
      * In order to uniquely pinpoint the location on the map when we launch the
      * map intent, we store the latitude and longitude.
@@ -24,16 +23,16 @@ public class SunshinePreferences {
      * Helper method to handle setting location details in Preferences (City Name, Latitude,
      * Longitude)
      *
-     * @param context        Context used to get the SharedPreferences
-     * @param lat      The latitude of the city
-     * @param lon      The longitude of the city
+     * @param context Context used to get the SharedPreferences
+     * @param lat     The latitude of the city
+     * @param lon     The longitude of the city
      */
     static public void setLocationDetails(Context context, double lat, double lon) {
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sp.edit();
 
-        editor.putLong(PREF_COORD_LAT , Double.doubleToRawLongBits(lat));
+        editor.putLong(PREF_COORD_LAT, Double.doubleToRawLongBits(lat));
         editor.putLong(PREF_COORD_LONG, Double.doubleToRawLongBits(lon));
         editor.apply();
 
@@ -69,7 +68,7 @@ public class SunshinePreferences {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String keyForLocation = context.getString(R.string.pref_location_key);
         String defaultLocation = context.getString(R.string.pref_location_default);
-        return sharedPreferences.getString(keyForLocation,defaultLocation);
+        return sharedPreferences.getString(keyForLocation, defaultLocation);
     }
 
     /**
@@ -83,13 +82,12 @@ public class SunshinePreferences {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String keyForUnits = context.getString(R.string.pref_units_key);
         String defaultUnits = context.getString(R.string.pref_units_metric);
-        String preferredUnits = sharedPreferences.getString(keyForUnits,defaultUnits);
+        String preferredUnits = sharedPreferences.getString(keyForUnits, defaultUnits);
         String metric = context.getString(R.string.pref_units_imperial);
         boolean userPreferenceMetric;
-        if(metric.equals(preferredUnits)){
+        if (metric.equals(preferredUnits)) {
             userPreferenceMetric = true;
-        }
-        else {
+        } else {
             userPreferenceMetric = false;
         }
         return userPreferenceMetric;
@@ -109,8 +107,6 @@ public class SunshinePreferences {
     }
 
 
-
-
     /**
      * Returns the location coordinates associated with the location.  Note that these coordinates
      * may not be set, which results in (0,0) being returned. (conveniently, 0,0 is in the middle
@@ -121,10 +117,10 @@ public class SunshinePreferences {
      */
     public static double[] getLocationCoordinates(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        double[] preferredCoordinates  = new double[2];
+        double[] preferredCoordinates = new double[2];
 
-        preferredCoordinates[0] = Double.longBitsToDouble(sp.getLong(PREF_COORD_LAT,Double.doubleToRawLongBits(0.0)));
-        preferredCoordinates[1] = Double.longBitsToDouble(sp.getLong(PREF_COORD_LONG,Double.doubleToRawLongBits(0.0)));
+        preferredCoordinates[0] = Double.longBitsToDouble(sp.getLong(PREF_COORD_LAT, Double.doubleToRawLongBits(0.0)));
+        preferredCoordinates[1] = Double.longBitsToDouble(sp.getLong(PREF_COORD_LONG, Double.doubleToRawLongBits(0.0)));
 
         return preferredCoordinates;
     }
@@ -138,18 +134,47 @@ public class SunshinePreferences {
      */
     public static boolean isLocationLatLonAvailable(Context context) {
 
-       SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-       boolean spContainsLatitude = sp.contains(PREF_COORD_LAT);
-       boolean spContainsLongitude = sp.contains(PREF_COORD_LAT);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean spContainsLatitude = sp.contains(PREF_COORD_LAT);
+        boolean spContainsLongitude = sp.contains(PREF_COORD_LAT);
 
-       boolean spContainBothLatitudeLongitude = false;
+        boolean spContainBothLatitudeLongitude = false;
 
-       if(spContainsLatitude && spContainsLongitude){
+        if (spContainsLatitude && spContainsLongitude) {
 
-           spContainBothLatitudeLongitude = true;
+            spContainBothLatitudeLongitude = true;
 
-       }
-       return spContainBothLatitudeLongitude;
+        }
+        return spContainBothLatitudeLongitude;
+    }
+
+    public static boolean areNotificationEnable(Context context) {
+        String displayNotificationKey = context.getString(R.string.pref_enable_notifications_key);
+        boolean shouldDisplayNotificationByDefault = context.getResources()
+                .getBoolean(R.bool.show_notification_by_default);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+
+        return sp.getBoolean(displayNotificationKey, shouldDisplayNotificationByDefault);
+    }
+
+    public static long getLastNotificationTimeInMillis(Context context) {
+        String lastNotificationKey = context.getString(R.string.pref_last_notification);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getLong(lastNotificationKey, 0);
+
+    }
+
+    public static long getEllapsedTimeSinceLastNotification(Context context) {
+        long lastNotificationTimeMillis = SunshinePreferences.getLastNotificationTimeInMillis(context);
+        return System.currentTimeMillis() - lastNotificationTimeMillis;
+    }
+
+    public static void saveLastNotificationTime(Context context, long timeofNotifcaiton) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sp.edit();
+        String lastNotificationKey = context.getString(R.string.pref_last_notification);
+        editor.putLong(lastNotificationKey, timeofNotifcaiton);
+        editor.apply();
     }
 
 
