@@ -6,6 +6,9 @@ android {
     compileSdkVersion 31
     buildToolsVersion "31.0.0"
 
+    buildFeatures{
+        dataBinding = true
+    }
     defaultConfig {
         applicationId "com.example.android.boardingpass"
         minSdkVersion 19
