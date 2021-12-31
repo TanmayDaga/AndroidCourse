@@ -2,14 +2,14 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:defaultValue="@string/pref_location_defaultValue"
+        android:defaultValue="@string/pref_location_default"
         android:singleLine="true"
         android:key="@string/pref_location_key"
         android:title="@string/pref_location_label"
         android:inputType="text" />
     <ListPreference
         android:entries="@array/pref_units_options"
-        android:defaultValue="@string/pref_units_imperial_key"
+        android:defaultValue="@string/pref_units_imperial"
         android:entryValues="@array/pref_units_values"
         android:key="@string/pref_units_key"
         android:title="@string/pref_units_label"

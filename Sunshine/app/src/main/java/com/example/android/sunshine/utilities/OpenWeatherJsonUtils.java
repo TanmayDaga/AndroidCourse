@@ -188,6 +188,7 @@ public final class OpenWeatherJsonUtils {
             low = temperatureObject.getDouble(OWM_MIN);
 
             ContentValues weatherValues = new ContentValues();
+            weatherValues.put(WeatherContract.WeatherEntry.COLUMN_WEATHER_ID,weatherId);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_DATE, dateTimeMillis);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_HUMIDITY, humidity);
             weatherValues.put(WeatherContract.WeatherEntry.COLUMN_PRESSURE, pressure);

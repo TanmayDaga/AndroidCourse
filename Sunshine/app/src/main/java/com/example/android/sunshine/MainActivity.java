@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
     public static final int INDEX_WEATHER_DATE = 0;
     public static final int INDEX_WEATHER_MAX_TEMP = 1;
     public static final int INDEX_WEATHER_MIN_TEMP = 2;
-    public static final int INDEX_WEATHER_ID = 3;
+    public static final int INDEX_WEATHER_CONDITION_ID = 3;
 
     private static final int ID_FORECAST_LOADER = 44;
 
@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapter.o
 
         if (mPostion == RecyclerView.NO_POSITION) mPostion = 0;
 
+        Log.d(TAG,String.valueOf(data.getCount()));
         mRecyclerView.scrollToPosition(mPostion);
         if (data.getCount() != 0) showWeatherDataView();
 

@@ -3,17 +3,18 @@ package com.example.android.sunshine.sync;
 import android.app.IntentService;
 import android.content.Intent;
 
-import androidx.annotation.Nullable;
 
 public class SunshineSyncIntentService extends IntentService {
 
-
-    public SunshineSyncIntentService() {
+    public SunshineSyncIntentService(){
         super("SunshineSyncIntentService");
     }
 
+
     @Override
-    protected void onHandleIntent(@Nullable Intent intent) {
+    protected void onHandleIntent(Intent intent) {
+
         SunshineSyncTask.syncWeather(this);
+
     }
 }

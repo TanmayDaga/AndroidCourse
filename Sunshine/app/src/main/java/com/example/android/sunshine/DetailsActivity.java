@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ShareCompat;
+import androidx.databinding.DataBindingUtil;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
 
 import com.example.android.sunshine.data.WeatherContract.WeatherEntry;
+import com.example.android.sunshine.databinding.ActivityDetailsBinding;
 import com.example.android.sunshine.utilities.SunshineDateUtils;
 import com.example.android.sunshine.utilities.SunshineWeatherUtils;
 
@@ -51,27 +53,17 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
     private String mForecastSummary;
     private Uri mUri;
 
-    private TextView mDateView;
-    private TextView mDescriptionView;
-    private TextView mHighTemperatureView;
-    private TextView mLowTemperatureView;
-    private TextView mHumidityView;
-    private TextView mWindView;
-    private TextView mPressureView;
+
+    private ActivityDetailsBinding mDetailsBinding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
 
-        mDateView = (TextView) findViewById(R.id.date);
-        mDescriptionView = (TextView) findViewById(R.id.weather_description);
-        mHighTemperatureView = (TextView) findViewById(R.id.high_temp);
-        mLowTemperatureView = (TextView) findViewById(R.id.low_temperature);
-        mHumidityView = (TextView) findViewById(R.id.humidity);
-        mWindView = (TextView) findViewById(R.id.wind);
-        mPressureView = (TextView) findViewById(R.id.pressure);
 
+
+        mDetailsBinding = DataBindingUtil.setContentView(DetailsActivity.this,R.layout.activity_details);
         mUri = getIntent().getData();
         if (mUri == null) throw new NullPointerException("Uri for details activity cannot be null");
 
@@ -135,35 +127,57 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
         if(!cursorHasValidData) return;//        No data available
 
+        int weatherId = data.getInt(INDEX_WEATHER_WEATHER_ID);
+        int weatherIconID = SunshineWeatherUtils.getLargeArtResourceIdForWeatherCondition(weatherId);
+        mDetailsBinding.primaryInfo.weatherIcon.setImageResource(weatherIconID);
+
         long localDateMidnightGmt = data.getLong(INDEX_WEATHER_DATE);
         String dateText = SunshineDateUtils.getFriendlyDateString(this,
                 localDateMidnightGmt,true);
-        mDateView.setText(dateText);
+        mDetailsBinding.primaryInfo.date.setText(dateText);
 
-        int weatherId = data.getInt(INDEX_WEATHER_WEATHER_ID);
         String description = SunshineWeatherUtils.getStringForWeatherCondition(this,weatherId);
-        mDescriptionView.setText(description);
+        String descriptionAlly = getString(R.string.a11y_forecast,description);
+        mDetailsBinding.primaryInfo.weatherDescription.setText(descriptionAlly);
+        mDetailsBinding.primaryInfo.weatherDescription.setContentDescription(descriptionAlly);
+
+        mDetailsBinding.primaryInfo.weatherIcon.setContentDescription(descriptionAlly);
 
         double highInCelsius = data.getDouble(INDEX_WEATHER_MAX_TEMP);
         String highString = SunshineWeatherUtils.formatTemperature(this,highInCelsius);
-        mHighTemperatureView.setText(highString);
+        String highAlly  = getString(R.string.a11y_high_temp,highString);
+        mDetailsBinding.primaryInfo.highTemp.setText(highString);
+        mDetailsBinding.primaryInfo.highTemp.setContentDescription(highAlly);
 
         double lowInCelsius = data.getDouble(INDEX_WEATHER_MIN_TEMP);
         String lowString = SunshineWeatherUtils.formatTemperature(this,lowInCelsius);
-        mLowTemperatureView.setText(lowString);
+        String lowAlly = getString(R.string.a11y_low_temp,lowString);
+        mDetailsBinding.primaryInfo.lowTemp.setText(lowString);
+        mDetailsBinding.primaryInfo.lowTemp.setContentDescription(lowAlly);
 
         float humidity = data.getFloat(INDEX_WEATHER_HUMIDITY);
         String humidityString = getString(R.string.format_humidity,humidity);
-        mHumidityView.setText(humidityString);
+        String humidityAlly = getString(R.string.a11y_humidity,humidityString);
+        mDetailsBinding.extraDetails.humidity.setText(humidityString);
+        mDetailsBinding.extraDetails.humidity.setContentDescription(humidityAlly);
+        mDetailsBinding.extraDetails.humidityLabel.setContentDescription(humidityAlly);
+
 
         float windSpeed =  data.getFloat(INDEX_WEATHER_WIND_SPEED);
         float windDirection = data.getFloat(INDEX_WEATHER_DEGREES);
         String windString = SunshineWeatherUtils.getFormattedWind(this,windSpeed,windDirection);
-        mWindView.setText(windString);
+        String windAlly = getString(R.string.a11y_wind,windString);
+        mDetailsBinding.extraDetails.humidity.setText(windString);
+        mDetailsBinding.extraDetails.humidity.setContentDescription(windAlly);
+        mDetailsBinding.extraDetails.humidityLabel.setContentDescription(windAlly);
+
 
         float pressure = data.getFloat(INDEX_WEATHER_PRESSURE);
         String pressureString = getString(R.string.format_pressure,pressure);
-        mPressureView.setText(pressureString);
+        String pressureAlly = getString(R.string.a11y_pressure);
+        mDetailsBinding.extraDetails.pressure.setText(pressureString);
+        mDetailsBinding.extraDetails.pressure.setContentDescription(pressureAlly);
+        mDetailsBinding.extraDetails.pressureLabel.setContentDescription(pressureAlly);
 
         mForecastSummary = String.format("%s - %s - %s%s",
                 dateText,description,highString,lowString);
