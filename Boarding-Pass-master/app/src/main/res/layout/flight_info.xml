@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imageViewLeftRectangle"
+            android:layout_width="75dp"
+            android:layout_height="97dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:srcCompat="@drawable/shape_rectangle_stroke" />
+
+        <ImageView
+            android:id="@+id/imageViewDivider"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:background="@color/colorPrimaryLight"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewLeftRectangle"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewRightRectangle"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLeftRectangle"
+            app:layout_constraintTop_toTopOf="@+id/imageViewLeftRectangle"
+            app:srcCompat="@drawable/shape_rectangle_stroke" />
+
+        <ImageView
+            android:id="@+id/imageViewRightRectangle"
+            android:layout_width="75dp"
+            android:layout_height="97dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewLeftRectangle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageViewLeftRectangle"
+            app:srcCompat="@drawable/shape_rectangle_stroke" />
+
+
+        <TextView
+            android:id="@+id/textViewOriginAirport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/origin_code"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewLeftRectangle"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewLeftRectangle"
+            app:layout_constraintStart_toStartOf="@+id/imageViewLeftRectangle"
+            app:layout_constraintTop_toTopOf="@+id/imageViewLeftRectangle" />
+
+        <TextView
+            android:id="@+id/textViewDestinationAirport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/destination_code"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewRightRectangle"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewRightRectangle"
+            app:layout_constraintStart_toStartOf="@+id/imageViewRightRectangle"
+            app:layout_constraintTop_toTopOf="@+id/imageViewRightRectangle" />
+
+        <ImageView
+            android:id="@+id/imageViewArtPlane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/ic_plane"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewDivider"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewRightRectangle"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLeftRectangle" />
+
+
+        <TextView
+            android:id="@+id/textViewFlightCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewRightRectangle"
+            app:layout_constraintStart_toEndOf="@+id/imageViewLeftRectangle"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewDivider"
+            tools:text="@string/flight_code" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

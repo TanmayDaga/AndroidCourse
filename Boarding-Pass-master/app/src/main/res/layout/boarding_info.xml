@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageViewTableHead"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toTopOf="@id/textViewTerminalLabel"
+            android:background="@color/colorPrimaryLight"
+            app:layout_constraintBottom_toBottomOf="@id/textViewGateLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewTableBody"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewTerminal"
+            app:layout_constraintEnd_toEndOf="@id/imageViewTableHead"
+            app:layout_constraintHorizontal_bias="1.0"
+
+            app:layout_constraintStart_toEndOf="@id/textViewSeat"
+            app:layout_constraintStart_toStartOf="@+id/imageViewTableHead"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewTableHead" />
+
+        <TextView
+            android:id="@+id/textViewTerminalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="2dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewTableHead"
+            app:layout_constraintEnd_toEndOf="@+id/textViewTerminal"
+
+            app:layout_constraintStart_toStartOf="@+id/textViewTerminal"
+            app:layout_constraintTop_toTopOf="@+id/imageViewTableHead"
+
+            tools:text="@string/terminal_label" />
+
+        <TextView
+            android:id="@+id/textViewGateLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintEnd_toEndOf="@+id/textViewGate"
+            app:layout_constraintStart_toStartOf="@+id/textViewGate"
+            app:layout_constraintTop_toTopOf="@+id/imageViewTableHead"
+
+            tools:text="@string/gate_label" />
+
+        <TextView
+            android:id="@+id/textViewSeatLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewTableHead"
+            app:layout_constraintEnd_toEndOf="@+id/textViewSeat"
+            app:layout_constraintStart_toStartOf="@+id/textViewSeat"
+            app:layout_constraintTop_toTopOf="@+id/imageViewTableHead"
+
+            tools:text="@string/seat_label" />
+
+        <TextView
+            android:id="@+id/textViewTerminal"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:text="@string/terminal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toStartOf="@+id/textViewGate"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewTableHead"
+ />
+
+        <TextView
+            android:id="@+id/textViewGate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gate"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+
+            android:textColor="@android:color/white"
+
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewTableBody"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewTableBody"
+            app:layout_constraintStart_toStartOf="@+id/imageViewTableBody"
+            app:layout_constraintTop_toTopOf="@+id/imageViewTableBody" />
+
+        <TextView
+            android:id="@+id/textViewSeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/seat"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+
+            android:textColor="@android:color/white"
+
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewTableBody"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewTableBody"
+            app:layout_constraintStart_toEndOf="@+id/textViewGate"
+            app:layout_constraintTop_toTopOf="@+id/imageViewTableBody" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
