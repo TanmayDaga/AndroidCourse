@@ -167,9 +167,9 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
         float windDirection = data.getFloat(INDEX_WEATHER_DEGREES);
         String windString = SunshineWeatherUtils.getFormattedWind(this,windSpeed,windDirection);
         String windAlly = getString(R.string.a11y_wind,windString);
-        mDetailsBinding.extraDetails.humidity.setText(windString);
-        mDetailsBinding.extraDetails.humidity.setContentDescription(windAlly);
-        mDetailsBinding.extraDetails.humidityLabel.setContentDescription(windAlly);
+        mDetailsBinding.extraDetails.windMeasurement.setText(windString);
+        mDetailsBinding.extraDetails.windMeasurement.setContentDescription(windAlly);
+        mDetailsBinding.extraDetails.windLabel.setContentDescription(windAlly);
 
 
         float pressure = data.getFloat(INDEX_WEATHER_PRESSURE);
