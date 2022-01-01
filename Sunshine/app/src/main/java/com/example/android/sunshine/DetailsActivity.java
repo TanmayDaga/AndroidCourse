@@ -174,7 +174,7 @@ public class DetailsActivity extends AppCompatActivity implements LoaderManager.
 
         float pressure = data.getFloat(INDEX_WEATHER_PRESSURE);
         String pressureString = getString(R.string.format_pressure,pressure);
-        String pressureAlly = getString(R.string.a11y_pressure);
+        String pressureAlly = getString(R.string.a11y_pressure,pressureString);
         mDetailsBinding.extraDetails.pressure.setText(pressureString);
         mDetailsBinding.extraDetails.pressure.setContentDescription(pressureAlly);
         mDetailsBinding.extraDetails.pressureLabel.setContentDescription(pressureAlly);
